@@ -1,4 +1,7 @@
 {
-  "appTitle": "Chinchon Counter"
+  "appTitle": "Chinchon Counter",
 
+  "newGame": "Nueva partida",
+  "continueGame": "Reanudar partida",
+  "allPlayers": "Todos los jugadores"
 }

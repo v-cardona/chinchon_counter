@@ -1,5 +1,7 @@
 import 'package:chinchon_counter/common/constants/languages.dart';
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
+import 'package:chinchon_counter/presentation/journeys/home/home_screen.dart';
+import 'package:chinchon_counter/presentation/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -13,6 +15,13 @@ class ChinchonCounterApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: TranslationConstants.appTitle,
+        theme: ThemeData(
+          primaryColor: AppColor.mulledWine,
+          accentColor: AppColor.screaminGreen,
+          scaffoldBackgroundColor: AppColor.vulcan,
+          unselectedWidgetColor: AppColor.screaminGreen,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
         supportedLocales:
             Languages.languages.map((e) => Locale(e.code)).toList(),
         locale: Locale('es'),
@@ -21,6 +30,6 @@ class ChinchonCounterApp extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        home: Text('data'));
+        home: HomeScreen());
   }
 }
