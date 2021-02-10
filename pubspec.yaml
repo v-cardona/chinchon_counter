@@ -40,6 +40,9 @@ dependencies:
   equatable: ^1.2.5
   # adds additional capabilities to Dart Streams and StreamControllers
   rxdart: ^0.22.0
+  # noSQL
+  hive: ^1.4.4+1
+  path_provider: ^1.6.27
   # to i18n
   flutter_localizations:
     sdk: flutter
@@ -47,6 +50,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^0.8.2
+  build_runner: ^1.10.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

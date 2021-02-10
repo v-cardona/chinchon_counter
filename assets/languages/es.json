@@ -3,5 +3,7 @@
 
   "newGame": "Nueva partida",
   "continueGame": "Reanudar partida",
-  "allPlayers": "Todos los jugadores"
+  "allPlayers": "Todos los jugadores",
+  "players": "Jugadores",
+  "noPlayers": "Añade tu primer jugador"
 }
