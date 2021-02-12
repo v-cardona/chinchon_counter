@@ -5,5 +5,14 @@
   "continueGame": "Reanudar partida",
   "allPlayers": "Todos los jugadores",
   "players": "Jugadores",
-  "noPlayers": "Añade tu primer jugador"
+  "noPlayers": "Añade tu primer jugador",
+  "newPlayer": "Crear jugador",
+  "name": "Nombre",
+  "createPlayer": "Crear jugador",
+  "errorMsgGeneral": "Ha ocurrido un error",
+  "errorDb": "Ha ocurrido un error con la base de datos",
+  "errorcolorNotAvailable": "Ese color esta en uso por otro jugador.",
+  "errornameEmpty": "El nombre no puede ser vacío",
+  "chooseColor": "Elige un color:",
+  "done": "Hecho"
 }

@@ -1,7 +1,6 @@
 import 'package:chinchon_counter/data/data_sources/players_local_data_source.dart';
 import 'package:chinchon_counter/data/repositories/game_repository_impl.dart';
 import 'package:chinchon_counter/domain/repositories/game_repository.dart';
-import 'package:chinchon_counter/domain/usecases/check_available_color.dart';
 import 'package:chinchon_counter/domain/usecases/create_player.dart';
 import 'package:chinchon_counter/domain/usecases/delete_player.dart';
 import 'package:chinchon_counter/domain/usecases/edit_player.dart';
@@ -22,8 +21,6 @@ Future init() async {
       () => GameRepositoryImpl(getItInstance()));
 
   // init usecases
-  getItInstance.registerLazySingleton<CheckIfAvailableColor>(
-      () => CheckIfAvailableColor(getItInstance()));
   getItInstance
       .registerLazySingleton<CreatePlayer>(() => CreatePlayer(getItInstance()));
   getItInstance
@@ -36,6 +33,6 @@ Future init() async {
       .registerLazySingleton<GetPlayers>(() => GetPlayers(getItInstance()));
 
   // blocs
-  getItInstance.registerLazySingleton(() =>
+  getItInstance.registerFactory(() =>
       PlayerBloc(createPlayer: getItInstance(), getPlayers: getItInstance()));
 }

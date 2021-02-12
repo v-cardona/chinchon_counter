@@ -1,3 +1,4 @@
+import 'package:chinchon_counter/common/constants/db_local_constats.dart';
 import 'package:chinchon_counter/data/tables/player_table.dart';
 import 'package:chinchon_counter/presentation/chinchon_counter_app.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,9 @@ void main() async {
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   Hive.registerAdapter(PlayerTableAdapter());
+  
+    final playerBox = await Hive.openBox(DbLocalConstants.playersBox);
+    playerBox.deleteFromDisk();
   // run app
   runApp(ChinchonCounterApp());
 }

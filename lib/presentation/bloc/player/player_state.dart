@@ -1,40 +1,37 @@
 part of 'player_bloc.dart';
 
-abstract class PlayerState extends Equatable {
-  const PlayerState();
+class PlayerState extends Equatable {
+
+  final List<PlayerEntity> playersEntity;
+  final PlayerEntity playerEntity;
+  final String name;
+  final int color;
+  final AppError appEror;
+  final PlayerStatus status;
+
+  const PlayerState({this.playersEntity, this.playerEntity, this.name = '', this.color, this.appEror, this.status = PlayerStatus.initial});
   
   @override
-  List<Object> get props => [];
+  List<Object> get props => [playersEntity, playerEntity, name, color, appEror, status];
+
+  
+  PlayerState copyWith({
+  List<PlayerEntity> playersEntity,
+  PlayerEntity playerEntity,
+  String name,
+  int color,
+  AppError appEror,
+  PlayerStatus status
+  }) {
+    return PlayerState(
+      playersEntity: playersEntity ?? this.playersEntity,
+      playerEntity: playerEntity ?? this.playerEntity,
+      name: name ?? this.name,
+      color: color ?? this.color,
+      appEror: appEror ?? this.appEror,
+      status: status ?? this.status,
+    );
+  }
 }
 
-class PlayerInitial extends PlayerState {}
-
-class PlayerLoading extends PlayerState {}
-
-class PlayerError extends PlayerState {
-  final AppError appError;
-
-  PlayerError(this.appError);
-
-  @override
-  List<Object> get props => [appError];}
-
-class PlayerLoaded extends PlayerState {
-  final PlayerEntity playerEntity;
-
-  PlayerLoaded(this.playerEntity);
-
-  @override
-  List<Object> get props => [playerEntity];
-}
-
-class AllPlayerLoaded extends PlayerState {
-  final List<PlayerEntity> playersEntity;
-
-  AllPlayerLoaded(this.playersEntity);
-
-  @override
-  List<Object> get props => [playersEntity];
-}
-
-class LoadPlayers extends PlayerState {}
+enum PlayerStatus { initial, loading, playerLoaded, playersLoaded, created, edited, deleted, error}

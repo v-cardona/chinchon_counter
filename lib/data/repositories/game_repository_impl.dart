@@ -2,7 +2,6 @@ import 'package:chinchon_counter/data/data_sources/players_local_data_source.dar
 import 'package:chinchon_counter/data/tables/player_table.dart';
 import 'package:chinchon_counter/domain/entities/app_error.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
-import 'dart:ui';
 
 import 'package:chinchon_counter/domain/repositories/game_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -13,14 +12,15 @@ class GameRepositoryImpl extends GameRepository {
   GameRepositoryImpl(this.localDataSource);
 
   @override
-  Future<Either<AppError, bool>> checkIfColorIsAvailable(Color color) {
-    // TODO: implement checkIfColorIsAvailable
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<AppError, bool>> createPlayer(PlayerEntity playerEntity) async {
     try {
+      if (playerEntity.name.isEmpty) {
+        return Left(AppError(AppErrorType.nameEmpty));
+      }
+      List<int> colors = await localDataSource.getColorsPlayers();
+      if (colors.contains(playerEntity.color)) {
+        return Left(AppError(AppErrorType.colorNotAvailable));
+      }
       PlayerTable playerTable = PlayerTable.fromPlayerEntity(playerEntity);
       await localDataSource.createPlayer(playerTable);
       return Right(true);

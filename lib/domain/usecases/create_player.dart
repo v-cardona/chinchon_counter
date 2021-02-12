@@ -8,10 +8,9 @@ class CreatePlayer extends UseCase<bool, PlayerParams> {
   final GameRepository gameRepository;
 
   CreatePlayer(this.gameRepository);
-  
+
   @override
   Future<Either<AppError, bool>> call(params) async {
-    return await gameRepository.createPlayer(params.playerEntity);
+        return await gameRepository.createPlayer(params.playerEntity);
   }
-
 }

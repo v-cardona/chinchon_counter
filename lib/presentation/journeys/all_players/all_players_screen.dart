@@ -4,6 +4,7 @@ import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
 import 'package:chinchon_counter/presentation/journeys/all_players/all_players_list_widget.dart';
+import 'package:chinchon_counter/presentation/journeys/create_player/create_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,24 +37,32 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
         appBar: AppBar(
           title: Text(TranslationConstants.players),
         ),
-        floatingActionButton:
-            FloatingActionButton(child: Icon(Icons.add), onPressed: () {}),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(
+                  builder: (context) => CreatePlayerScreen(),
+                ))
+                .then((value) => _playerBloc.add(GetPlayersEvent()));
+          },
+        ),
         body: BlocProvider<PlayerBloc>.value(
           value: _playerBloc,
           child: BlocBuilder<PlayerBloc, PlayerState>(
             builder: (context, state) {
-              if (state is PlayerError) {
+              if (state.status == PlayerStatus.error) {
                 return Container(
                   child: Text('error'),
                 );
-              } else if (state is AllPlayerLoaded) {
+              } else if (state.status == PlayerStatus.playersLoaded) {
                 List<PlayerEntity> playersList = state.playersEntity;
                 if (playersList.isEmpty) {
                   return Center(
                     child: Text(
                       TranslationConstants.noPlayers.translate(context),
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: TextStyle(color: Colors.white),
                     ),
                   );
                 } else {

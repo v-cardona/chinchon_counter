@@ -9,4 +9,4 @@ class AppError extends Equatable{
   List<Object> get props => [errorType];
 }
 
-enum AppErrorType {dba}
+enum AppErrorType {dba, errorMsgGeneral, colorNotAvailable, nameEmpty}

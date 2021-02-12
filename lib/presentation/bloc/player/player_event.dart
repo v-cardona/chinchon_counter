@@ -7,14 +7,25 @@ abstract class PlayerEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CreatePlayerEvent extends PlayerEvent {
-  final PlayerEntity playerEntity;
+class ChangePlayerNameEvent extends PlayerEvent {
+  final String name;
 
-  CreatePlayerEvent(this.playerEntity);
+  ChangePlayerNameEvent({ @required this.name});
 
   @override
-  List<Object> get props => [playerEntity];
+  List<Object> get props => [name];
 }
+
+class ChangePlayerColorEvent extends PlayerEvent {
+  final int color;
+
+  ChangePlayerColorEvent({@required this.color});
+
+  @override
+  List<Object> get props => [color];
+}
+
+class CreatePlayerEvent extends PlayerEvent {}
 
 class EditPlayerEvent extends PlayerEvent {
   final PlayerEntity playerEntity;

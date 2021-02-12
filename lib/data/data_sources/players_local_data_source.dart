@@ -1,6 +1,6 @@
 import 'package:chinchon_counter/common/constants/db_local_constats.dart';
 import 'package:chinchon_counter/data/tables/player_table.dart';
-import 'package:flutter/material.dart';
+import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:hive/hive.dart';
 
 abstract class PlayersLocalDataSource {
@@ -9,7 +9,7 @@ abstract class PlayersLocalDataSource {
   Future<void> createPlayer(PlayerTable playerTable);
   Future<void> deletePlayer(int playerId);
   Future<void> editPlayer(PlayerTable playerTable);
-  Future<bool> checkIfColorIsAvailable(Color color);
+  Future<List<int>> getColorsPlayers();
 }
 
 class PlayersLocalDataSourceImpl extends PlayersLocalDataSource {
@@ -23,7 +23,7 @@ class PlayersLocalDataSourceImpl extends PlayersLocalDataSource {
     });
     return players;
   }
-  
+
   @override
   Future<PlayerTable> getPlayer(int playerId) async {
     final playersBox = await Hive.openBox(DbLocalConstants.playersBox);
@@ -31,9 +31,15 @@ class PlayersLocalDataSourceImpl extends PlayersLocalDataSource {
   }
 
   @override
-  Future<bool> checkIfColorIsAvailable(Color color) {
-    // TODO: implement checkIfColorIsAvailable
-    throw UnimplementedError();
+  Future<List<int>> getColorsPlayers() async {
+    final playersBox = await Hive.openBox(DbLocalConstants.playersBox);
+    final playersIds = playersBox.keys;
+    List<int> colors = [];
+    playersIds.forEach((playerId) {
+      PlayerEntity playerEntity = playersBox.get(playerId);
+      colors.add(playerEntity.color);
+    });
+    return colors;
   }
 
   @override

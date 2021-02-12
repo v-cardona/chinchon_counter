@@ -13,4 +13,6 @@ class AppColor {
   static const Color fountainBlue = Color(0xFF64B5BE);
   static const Color heliotrope = Color(0xFFD438FF);
   static const Color screaminGreen = Color(0xFF5AFC5E);
+  static const Color royalBlue = Color(0xFF604FEF);
+  static const Color violet = Color(0xFFA74DBC);
 }
