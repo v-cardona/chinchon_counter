@@ -32,7 +32,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     } else if (event is CreatePlayerEvent) {
       yield state.copyWith(status: PlayerStatus.loading);
       PlayerEntity playerEntity = PlayerEntity(name: state.name, color: state.color);
-      Either<AppError, bool> createEither =
+      Either<AppError, int> createEither =
           await createPlayer(PlayerParams(playerEntity: playerEntity));
       yield createEither.fold((l) => state.copyWith(appEror: l, status: PlayerStatus.error),
           (r) => state.copyWith(status: PlayerStatus.created));

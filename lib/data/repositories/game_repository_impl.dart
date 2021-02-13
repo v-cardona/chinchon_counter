@@ -12,7 +12,7 @@ class GameRepositoryImpl extends GameRepository {
   GameRepositoryImpl(this.localDataSource);
 
   @override
-  Future<Either<AppError, bool>> createPlayer(PlayerEntity playerEntity) async {
+  Future<Either<AppError, int>> createPlayer(PlayerEntity playerEntity) async {
     try {
       if (playerEntity.name.isEmpty) {
         return Left(AppError(AppErrorType.nameEmpty));
@@ -22,8 +22,8 @@ class GameRepositoryImpl extends GameRepository {
         return Left(AppError(AppErrorType.colorNotAvailable));
       }
       PlayerTable playerTable = PlayerTable.fromPlayerEntity(playerEntity);
-      await localDataSource.createPlayer(playerTable);
-      return Right(true);
+      int playerId = await localDataSource.createPlayer(playerTable);
+      return Right(playerId);
     } on Exception {
       return Left(AppError(AppErrorType.dba));
     }

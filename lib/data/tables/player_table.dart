@@ -16,11 +16,10 @@ class PlayerTable extends PlayerEntity {
   @HiveField(2)
   final int color;
 
-  PlayerTable({@required this.id, @required this.name, @required this.color}) : super(name: name, color: color);
+  PlayerTable({this.id, @required this.name, @required this.color}) : super(id:id, name: name, color: color);
 
   factory PlayerTable.fromPlayerEntity(PlayerEntity playerEntity) {
     return PlayerTable(
-      id: playerEntity.hashCode,
       color: playerEntity.color,
       name: playerEntity.name
     );

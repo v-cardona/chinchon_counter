@@ -19,9 +19,6 @@ void main() async {
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   Hive.registerAdapter(PlayerTableAdapter());
-  
-    final playerBox = await Hive.openBox(DbLocalConstants.playersBox);
-    playerBox.deleteFromDisk();
   // run app
   runApp(ChinchonCounterApp());
 }

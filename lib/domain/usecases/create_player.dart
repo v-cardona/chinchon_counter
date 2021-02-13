@@ -4,13 +4,13 @@ import 'package:chinchon_counter/domain/repositories/game_repository.dart';
 import 'package:chinchon_counter/domain/usecases/usecase.dart';
 import 'package:dartz/dartz.dart';
 
-class CreatePlayer extends UseCase<bool, PlayerParams> {
+class CreatePlayer extends UseCase<int, PlayerParams> {
   final GameRepository gameRepository;
 
   CreatePlayer(this.gameRepository);
 
   @override
-  Future<Either<AppError, bool>> call(params) async {
-        return await gameRepository.createPlayer(params.playerEntity);
+  Future<Either<AppError, int>> call(params) async {
+    return await gameRepository.createPlayer(params.playerEntity);
   }
 }
