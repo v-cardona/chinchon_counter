@@ -51,19 +51,9 @@ class GameRepositoryImpl extends GameRepository {
   }
 
   @override
-  Future<Either<AppError, PlayerEntity>> getPlayer(int playerId) async {
-    try {
-      PlayerEntity player = await localDataSource.getPlayer(playerId);
-      return Right(player);
-    } on Exception {
-      return Left(AppError(AppErrorType.dba));
-    }
-  }
-
-  @override
   Future<Either<AppError, List<PlayerEntity>>> getPlayers() async {
     try {
-      List<PlayerEntity> players = await localDataSource.getPlayers();
+      List<PlayerTable> players = await localDataSource.getPlayers();
       return Right(players);
     } on Exception {
       return Left(AppError(AppErrorType.dba));

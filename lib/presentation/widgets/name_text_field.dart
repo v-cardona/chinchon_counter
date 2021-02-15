@@ -1,7 +1,7 @@
 import 'package:chinchon_counter/common/constants/size_constants.dart';
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
-import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,7 @@ class NameTextField extends StatelessWidget {
           horizontal: Sizes.dimen_14.w, vertical: Sizes.dimen_8.h),
       child: TextField(
         onChanged: (value) {
-          BlocProvider.of<PlayerBloc>(context).add(ChangePlayerNameEvent(name: value));
+          BlocProvider.of<CreatePlayerBloc>(context).add(ChangePlayerNameEvent(name: value));
         },
         keyboardType: TextInputType.name,
         decoration: InputDecoration(

@@ -1,6 +1,6 @@
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
-import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
 import 'package:chinchon_counter/presentation/widgets/user_color_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +23,7 @@ class ColorPickerWidget extends StatelessWidget {
                 child: ColorPicker(
                   pickerColor: Color(color),
                   onColorChanged: (newColor) {
-                    BlocProvider.of<PlayerBloc>(context).add(ChangePlayerColorEvent(color: newColor.value));
+                    BlocProvider.of<CreatePlayerBloc>(context).add(ChangePlayerColorEvent(color: newColor.value));
                   },
                   showLabel: true,
                   pickerAreaHeightPercent: 0.8,

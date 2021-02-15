@@ -5,7 +5,6 @@ import 'package:hive/hive.dart';
 
 abstract class PlayersLocalDataSource {
   Future<List<PlayerTable>> getPlayers();
-  Future<PlayerTable> getPlayer(int playerId);
   Future<int> createPlayer(PlayerTable playerTable);
   Future<void> deletePlayer(int playerId);
   Future<void> editPlayer(PlayerTable playerTable);
@@ -19,15 +18,11 @@ class PlayersLocalDataSourceImpl extends PlayersLocalDataSource {
     final playersIds = playersBox.keys;
     List<PlayerTable> players = [];
     playersIds.forEach((playerId) {
-      players.add(playersBox.get(playerId));
+      PlayerTable table = playersBox.get(playerId);
+      table.id = playerId;
+      players.add(table);
     });
     return players;
-  }
-
-  @override
-  Future<PlayerTable> getPlayer(int playerId) async {
-    final playersBox = await Hive.openBox(DbLocalConstants.playersBox);
-    return playersBox.getAt(playerId);
   }
 
   @override

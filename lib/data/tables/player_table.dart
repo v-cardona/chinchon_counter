@@ -8,7 +8,7 @@ part 'player_table.g.dart';
 class PlayerTable extends PlayerEntity {
 
   @HiveField(0)
-  final int id;
+  int id;
 
   @HiveField(1)
   final String name;
@@ -16,10 +16,11 @@ class PlayerTable extends PlayerEntity {
   @HiveField(2)
   final int color;
 
-  PlayerTable({this.id, @required this.name, @required this.color}) : super(id:id, name: name, color: color);
+  PlayerTable({this.id, @required this.name, @required this.color}) : super(id: id, name: name, color: color);
 
   factory PlayerTable.fromPlayerEntity(PlayerEntity playerEntity) {
     return PlayerTable(
+      id: playerEntity.id,
       color: playerEntity.color,
       name: playerEntity.name
     );

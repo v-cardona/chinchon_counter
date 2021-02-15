@@ -8,5 +8,5 @@ class PlayerEntity extends Equatable {
   PlayerEntity({this.id, this.name, this.color});
 
   @override
-  List<Object> get props => [name, color];
+  List<Object> get props => [id, name, color];
 }

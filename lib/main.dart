@@ -1,4 +1,3 @@
-import 'package:chinchon_counter/common/constants/db_local_constats.dart';
 import 'package:chinchon_counter/data/tables/player_table.dart';
 import 'package:chinchon_counter/presentation/chinchon_counter_app.dart';
 import 'package:flutter/material.dart';

@@ -22,7 +22,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
   void initState() {
     super.initState();
     _playerBloc = getItInstance<PlayerBloc>();
-    _playerBloc.add(GetPlayersEvent());
+    _playerBloc.add(GetAllPlayersEvent());
   }
 
   @override
@@ -44,19 +44,19 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
                 .push(MaterialPageRoute(
                   builder: (context) => CreatePlayerScreen(),
                 ))
-                .then((value) => _playerBloc.add(GetPlayersEvent()));
+                .then((value) => _playerBloc.add(GetAllPlayersEvent()));
           },
         ),
         body: BlocProvider<PlayerBloc>.value(
           value: _playerBloc,
           child: BlocBuilder<PlayerBloc, PlayerState>(
             builder: (context, state) {
-              if (state.status == PlayerStatus.error) {
+              if (state is ErrorPlayerState) {
                 return Container(
                   child: Text('error'),
                 );
-              } else if (state.status == PlayerStatus.playersLoaded) {
-                List<PlayerEntity> playersList = state.playersEntity;
+              } else if (state is LoadedAllPlayers) {
+                List<PlayerEntity> playersList = state.playersList;
                 if (playersList.isEmpty) {
                   return Center(
                     child: Text(

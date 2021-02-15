@@ -3,7 +3,7 @@ import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
-import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
 import 'package:chinchon_counter/presentation/widgets/button.dart';
 import 'package:chinchon_counter/presentation/widgets/color_picker_widget.dart';
 import 'package:chinchon_counter/presentation/widgets/name_text_field.dart';
@@ -18,24 +18,23 @@ class CreatePlayerForm extends StatefulWidget {
 }
 
 class _CreatePlayerFormState extends State<CreatePlayerForm> {
-  PlayerBloc _playerBloc;
+  CreatePlayerBloc _createPlayerBloc;
 
   @override
   void initState() {
     super.initState();
-    _playerBloc = getItInstance<PlayerBloc>();
-    _playerBloc.add(GetPlayersEvent());
+    _createPlayerBloc = getItInstance<CreatePlayerBloc>();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _playerBloc.close();
+    _createPlayerBloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlayerBloc, PlayerState>(
+    return BlocBuilder<CreatePlayerBloc, CreatePlayerState>(
       builder: (context, state) {
         return Container(
             child: Column(
@@ -59,7 +58,7 @@ class _CreatePlayerFormState extends State<CreatePlayerForm> {
             Expanded(child: Container()),
             Button(
               onPressed: () =>
-                  BlocProvider.of<PlayerBloc>(context).add(CreatePlayerEvent()),
+                  BlocProvider.of<CreatePlayerBloc>(context).add(AddPlayerEvent()),
               text: TranslationConstants.newPlayer,
             )
           ],

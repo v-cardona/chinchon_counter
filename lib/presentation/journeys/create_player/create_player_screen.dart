@@ -2,7 +2,7 @@ import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/app_error.dart';
-import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
 import 'package:chinchon_counter/presentation/journeys/create_player/create_player_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,19 +15,18 @@ class CreatePlayerScreen extends StatefulWidget {
 }
 
 class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
-  PlayerBloc _playerBloc;
+  CreatePlayerBloc _createPlayerBloc;
 
   @override
   void initState() {
     super.initState();
-    _playerBloc = getItInstance<PlayerBloc>();
-    _playerBloc.add(GetPlayersEvent());
+    _createPlayerBloc = getItInstance<CreatePlayerBloc>();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _playerBloc.close();
+    _createPlayerBloc.close();
   }
 
   @override
@@ -37,21 +36,21 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
         title: Text(TranslationConstants.createPlayer),
       ),
       body: BlocProvider.value(
-          value: _playerBloc,
+          value: _createPlayerBloc,
           child: BlocListener(
-            cubit: _playerBloc,
-            child: BlocBuilder<PlayerBloc, PlayerState>(
-              cubit: _playerBloc,
+            cubit: _createPlayerBloc,
+            child: BlocBuilder<CreatePlayerBloc, CreatePlayerState>(
+              cubit: _createPlayerBloc,
               builder: (context, state) {
                 return CreatePlayerForm();
               },
             ),
-            listener: (context, PlayerState state) {
+            listener: (context, CreatePlayerState state) {
               // hide previous snackbars
               Scaffold.of(context).hideCurrentSnackBar();
 
               // if fail when login show snackbar fail
-              if (state.status == PlayerStatus.error) {
+              if (state.status == CreatePlayerStatus.error) {
                 Scaffold.of(context).showSnackBar(SnackBar(
                   content: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +64,7 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
               }
 
               // if login success emit Logged state to change to homeScreen
-              if (state.status == PlayerStatus.created) {
+              if (state.status == CreatePlayerStatus.created) {
                 Navigator.of(context).pop();
               }
             },
