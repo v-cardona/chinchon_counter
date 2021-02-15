@@ -19,7 +19,6 @@ class PlayersLocalDataSourceImpl extends PlayersLocalDataSource {
     final playersIds = playersBox.keys;
     List<PlayerTable> players = [];
     playersIds.forEach((playerId) {
-      print(playerId);
       players.add(playersBox.get(playerId));
     });
     return players;
