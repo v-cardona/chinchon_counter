@@ -2,31 +2,35 @@ import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/app_error.dart';
-import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
-import 'package:chinchon_counter/presentation/journeys/create_player/create_player_form.dart';
+import 'package:chinchon_counter/domain/entities/player_entity.dart';
+import 'package:chinchon_counter/presentation/bloc/edit_player/edit_player_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreatePlayerScreen extends StatefulWidget {
-  const CreatePlayerScreen({Key key}) : super(key: key);
+import 'edit_player_form.dart';
+
+class EditPlayerScreen extends StatefulWidget {
+  final PlayerEntity player;
+
+  const EditPlayerScreen({Key key, @required this.player}) : super(key: key);
 
   @override
-  _CreatePlayerScreenState createState() => _CreatePlayerScreenState();
+  _EditPlayerScreenState createState() => _EditPlayerScreenState();
 }
 
-class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
-  CreatePlayerBloc _createPlayerBloc;
+class _EditPlayerScreenState extends State<EditPlayerScreen> {
+  EditPlayerBloc _editPlayerBloc;
 
   @override
   void initState() {
     super.initState();
-    _createPlayerBloc = getItInstance<CreatePlayerBloc>();
+    _editPlayerBloc = getItInstance<EditPlayerBloc>();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _createPlayerBloc.close();
+    _editPlayerBloc.close();
   }
 
   @override
@@ -36,17 +40,13 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
         title: Text(TranslationConstants.createPlayer),
       ),
       body: BlocListener(
-        cubit: _createPlayerBloc,
-        child: BlocProvider(
-          create: (_) => _createPlayerBloc,
-          child: CreatePlayerForm(),
-        ),
-        listener: (context, CreatePlayerState state) {
+        cubit: _editPlayerBloc,
+        listener: (context, EditPlayerState state) {
           // hide previous snackbars
           Scaffold.of(context).hideCurrentSnackBar();
 
           // if fail when login show snackbar fail
-          if (state.status == CreatePlayerStatus.error) {
+          if (state.status == EditPlayerStatus.error) {
             Scaffold.of(context).showSnackBar(SnackBar(
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,10 +60,16 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
           }
 
           // if login success emit Logged state to change to homeScreen
-          if (state.status == CreatePlayerStatus.created) {
+          if (state.status == EditPlayerStatus.edited) {
             Navigator.of(context).pop();
           }
         },
+        child: BlocProvider(
+          create: (_) => _editPlayerBloc,
+          child: EditPlayerForm(
+            playerEntity: widget.player,
+          ),
+        ),
       ),
     );
   }

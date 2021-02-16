@@ -1,8 +1,11 @@
 import 'package:chinchon_counter/common/constants/size_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
+import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
+import 'package:chinchon_counter/presentation/journeys/edit_player/edit_player_screen.dart';
 import 'package:chinchon_counter/presentation/widgets/user_color_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AllPlayersListItem extends StatelessWidget {
   final PlayerEntity player;
@@ -14,12 +17,21 @@ class AllPlayersListItem extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          leading: UserColorWidget(color: player.color,),
+          onTap: () => Navigator.of(context)
+              .push(MaterialPageRoute(
+                builder: (_) => EditPlayerScreen(
+                  player: player,
+                ),
+              ))
+              .then((value) => BlocProvider.of<PlayerBloc>(context)
+                  .add(GetAllPlayersEvent())),
+          leading: UserColorWidget(
+            color: player.color,
+          ),
           title: Text(
             player.name,
             style: TextStyle(color: Colors.white, fontSize: Sizes.dimen_18.sp),
           ),
-          
         ),
         Divider(
           color: Colors.white,

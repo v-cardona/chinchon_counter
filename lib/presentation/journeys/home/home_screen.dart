@@ -34,11 +34,9 @@ class HomeScreen extends StatelessWidget {
                   AppColor.pictonBlue,
                   AppColor.fountainBlue
                 ],
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AllPlayersScreen(),
-                  ));
-                }),
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AllPlayersScreen(),
+                    ))),
           ],
         ),
       ),

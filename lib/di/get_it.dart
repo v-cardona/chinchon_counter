@@ -6,6 +6,7 @@ import 'package:chinchon_counter/domain/usecases/delete_player.dart';
 import 'package:chinchon_counter/domain/usecases/edit_player.dart';
 import 'package:chinchon_counter/domain/usecases/get_players.dart';
 import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/edit_player/edit_player_bloc.dart';
 import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -35,4 +36,6 @@ Future init() async {
       PlayerBloc(getPlayers: getItInstance()));
   getItInstance.registerFactory(() =>
       CreatePlayerBloc(createPlayer: getItInstance()));
+  getItInstance.registerFactory(() =>
+      EditPlayerBloc(editPlayer: getItInstance()));
 }

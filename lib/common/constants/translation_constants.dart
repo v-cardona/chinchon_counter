@@ -6,6 +6,7 @@ class TranslationConstants {
   static const String continueGame = 'continueGame';
   static const String allPlayers = 'allPlayers';
   static const String createPlayer = 'createPlayer';
+  static const String save = 'save';
   static const String players = 'players';
   static const String noPlayers = 'noPlayers';
   static const String newPlayer = 'newPlayer';
