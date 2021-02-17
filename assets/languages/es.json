@@ -15,5 +15,10 @@
   "errorcolorNotAvailable": "Ese color esta en uso por otro jugador.",
   "errornameEmpty": "El nombre no puede ser vacío",
   "chooseColor": "Elige un color:",
-  "done": "Hecho"
+  "done": "Hecho",
+  "no": "NO",
+  "yes": "SI",
+  "areYouSure": "¿Estas seguro?",
+  "reallyDeletePlayer": "¿Realmente quieres eliminar este jugador? No podrás volver a recuperarlo",
+  "deletedPlayer": "Jugador eliminado"
 }

@@ -13,6 +13,11 @@ class TranslationConstants {
   static const String name = 'name';
   static const String chooseColor = 'chooseColor';
   static const String done = 'done';
+  static const String no = 'no';
+  static const String yes = 'yes';
+  static const String areYouSure = 'areYouSure';
+  static const String reallyDeletePlayer = 'reallyDeletePlayer';
+  static const String deletedPlayer = 'deletedPlayer';
 
   // ERROR MESSAGES
   static const String errorMsgGeneral = 'errorMsgGeneral';

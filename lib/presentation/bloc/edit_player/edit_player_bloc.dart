@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chinchon_counter/domain/entities/app_error.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/domain/entities/player_params.dart';
+import 'package:chinchon_counter/domain/usecases/delete_player.dart';
 import 'package:chinchon_counter/domain/usecases/edit_player.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -12,8 +13,9 @@ part 'edit_player_state.dart';
 
 class EditPlayerBloc extends Bloc<ModifyPlayerEvent, EditPlayerState> {
   final EditPlayer editPlayer;
+  final DeletePlayer deletePlayer;
 
-  EditPlayerBloc({@required this.editPlayer})
+  EditPlayerBloc({ @required this.deletePlayer, @required this.editPlayer})
       : super(EditPlayerState(color: Colors.white.value));
 
   @override
@@ -31,6 +33,12 @@ class EditPlayerBloc extends Bloc<ModifyPlayerEvent, EditPlayerState> {
           await editPlayer(PlayerParams(playerEntity: playerEntity));
       yield editEither.fold((l) => state.copyWith(appEror: l, status: EditPlayerStatus.error),
           (r) => state.copyWith(status: EditPlayerStatus.edited));
+    } else if (event is DeletePlayerEvent) {
+      yield state.copyWith(status: EditPlayerStatus.loading);
+      Either<AppError, bool> deleteEither =
+          await deletePlayer(PlayerParams(playerId: event.playerId));
+      yield deleteEither.fold((l) => state.copyWith(appEror: l, status: EditPlayerStatus.error),
+          (r) => state.copyWith(status: EditPlayerStatus.deleted));
     }
   }
 }

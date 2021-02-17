@@ -1,4 +1,5 @@
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
+import 'package:chinchon_counter/common/extensions/app_error_extension.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
@@ -53,7 +54,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
             builder: (context, state) {
               if (state is ErrorPlayerState) {
                 return Container(
-                  child: Text('error'),
+                  child: Text(state.error.showError()),
                 );
               } else if (state is LoadedAllPlayers) {
                 List<PlayerEntity> playersList = state.playersList;

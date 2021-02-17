@@ -1,5 +1,7 @@
 import 'package:chinchon_counter/common/constants/size_constants.dart';
+import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
+import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
 import 'package:chinchon_counter/presentation/journeys/edit_player/edit_player_screen.dart';
@@ -19,12 +21,26 @@ class AllPlayersListItem extends StatelessWidget {
         ListTile(
           onTap: () => Navigator.of(context)
               .push(MaterialPageRoute(
-                builder: (context) => EditPlayerScreen(
-                  player: player,
+            builder: (context) => EditPlayerScreen(
+              player: player,
+            ),
+          ))
+              .then((value) {
+            print(value);
+            BlocProvider.of<PlayerBloc>(context).add(GetAllPlayersEvent());
+            if (value == 'deleted') {
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(TranslationConstants.deletedPlayer.translate()),
+                    Icon(Icons.info)
+                  ],
                 ),
-              ))
-              .then((value) => BlocProvider.of<PlayerBloc>(context)
-                  .add(GetAllPlayersEvent())),
+                backgroundColor: Colors.deepPurple,
+              ));
+            }
+          }),
           leading: UserColorWidget(
             color: player.color,
           ),

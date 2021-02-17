@@ -37,5 +37,5 @@ Future init() async {
   getItInstance.registerFactory(() =>
       CreatePlayerBloc(createPlayer: getItInstance()));
   getItInstance.registerFactory(() =>
-      EditPlayerBloc(editPlayer: getItInstance()));
+      EditPlayerBloc(editPlayer: getItInstance(), deletePlayer: getItInstance()));
 }

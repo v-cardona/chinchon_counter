@@ -4,6 +4,7 @@ import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/edit_player/edit_player_bloc.dart';
+import 'package:chinchon_counter/presentation/widgets/alert_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,6 +39,24 @@ class _EditPlayerScreenState extends State<EditPlayerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(TranslationConstants.editPlayer.translate()),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
+              onPressed: () => showDialog(
+                  context: context,
+                  child: AlertDialogWidget(
+                      title: TranslationConstants.areYouSure.translate(),
+                      content:
+                          TranslationConstants.reallyDeletePlayer.translate(),
+                      onPressedYes: () {
+                        _editPlayerBloc
+                            .add(DeletePlayerEvent(playerId: widget.player.id));
+                        Navigator.of(context).pop();
+                      })))
+        ],
       ),
       body: BlocListener(
         cubit: _editPlayerBloc,
@@ -50,18 +69,16 @@ class _EditPlayerScreenState extends State<EditPlayerScreen> {
             Scaffold.of(context).showSnackBar(SnackBar(
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(state.appEror.showError()),
-                  Icon(Icons.error)
-                ],
+                children: [Text(state.appEror.showError()), Icon(Icons.error)],
               ),
               backgroundColor: Colors.red,
             ));
-          }
-
-          // if login success emit Logged state to change to homeScreen
-          if (state.status == EditPlayerStatus.edited) {
+          } else if (state.status == EditPlayerStatus.edited) {
+            // if login success emit Logged state to change to allPlayers
             Navigator.of(context).pop();
+          } else if (state.status == EditPlayerStatus.deleted) {
+            // if login success emit Logged state to change to allPlayers
+            Navigator.of(context).pop('deleted');
           }
         },
         child: BlocProvider(

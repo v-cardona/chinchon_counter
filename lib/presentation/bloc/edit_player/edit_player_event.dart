@@ -34,4 +34,10 @@ class EditPlayerEvent extends ModifyPlayerEvent {
   List<Object> get props => [playerId];
 }
 
-class DeletePlayerEvent extends ModifyPlayerEvent {}
+class DeletePlayerEvent extends ModifyPlayerEvent {
+  final int playerId;
+
+  DeletePlayerEvent({@required this.playerId});
+
+  @override
+  List<Object> get props => [playerId];}
