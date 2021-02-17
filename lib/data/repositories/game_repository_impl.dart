@@ -41,7 +41,15 @@ class GameRepositoryImpl extends GameRepository {
 
   @override
   Future<Either<AppError, bool>> editPlayer(PlayerEntity playerEntity) async {
+    
     try {
+      if (playerEntity.name.isEmpty) {
+        return Left(AppError(AppErrorType.nameEmpty));
+      }
+      List<int> colors = await localDataSource.getColorsPlayers();
+      if (colors.contains(playerEntity.color)) {
+        return Left(AppError(AppErrorType.colorNotAvailable));
+      }
       PlayerTable playerTable = PlayerTable.fromPlayerEntity(playerEntity);
       await localDataSource.editPlayer(playerTable);
       return Right(true);
