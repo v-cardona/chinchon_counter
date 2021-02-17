@@ -1,6 +1,7 @@
 import 'package:chinchon_counter/common/constants/size_constants.dart';
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
+import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 class NameTextField extends StatelessWidget {
@@ -22,7 +23,7 @@ class NameTextField extends StatelessWidget {
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           fillColor: Colors.white,
-          labelText: TranslationConstants.name,
+          labelText: TranslationConstants.name.translate(context),
           labelStyle: TextStyle(color: Colors.white),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.deepPurple, width: 2),

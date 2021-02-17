@@ -19,7 +19,7 @@ class AllPlayersListItem extends StatelessWidget {
         ListTile(
           onTap: () => Navigator.of(context)
               .push(MaterialPageRoute(
-                builder: (_) => EditPlayerScreen(
+                builder: (context) => EditPlayerScreen(
                   player: player,
                 ),
               ))

@@ -6,11 +6,11 @@ class TranslationConstants {
   static const String continueGame = 'continueGame';
   static const String allPlayers = 'allPlayers';
   static const String createPlayer = 'createPlayer';
+  static const String editPlayer = 'editPlayer';
   static const String save = 'save';
   static const String players = 'players';
   static const String noPlayers = 'noPlayers';
-  static const String newPlayer = 'newPlayer';
-  static const String name = 'Nombre';
+  static const String name = 'name';
   static const String chooseColor = 'chooseColor';
   static const String done = 'done';
 

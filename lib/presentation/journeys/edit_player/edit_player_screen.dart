@@ -37,7 +37,7 @@ class _EditPlayerScreenState extends State<EditPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TranslationConstants.createPlayer),
+        title: Text(TranslationConstants.editPlayer),
       ),
       body: BlocListener(
         cubit: _editPlayerBloc,

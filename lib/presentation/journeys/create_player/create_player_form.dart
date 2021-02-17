@@ -49,7 +49,7 @@ class CreatePlayerForm extends StatelessWidget {
         Button(
           onPressed: () =>
               BlocProvider.of<CreatePlayerBloc>(context).add(AddPlayerEvent()),
-          text: TranslationConstants.newPlayer,
+          text: TranslationConstants.createPlayer,
         )
       ],
     ));

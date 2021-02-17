@@ -35,7 +35,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(TranslationConstants.players),
+          title: Text(TranslationConstants.players.translate(context)),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),

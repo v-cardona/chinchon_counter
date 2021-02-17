@@ -33,7 +33,7 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TranslationConstants.createPlayer),
+        title: Text(TranslationConstants.createPlayer.translate(context)),
       ),
       body: BlocListener(
         cubit: _createPlayerBloc,
