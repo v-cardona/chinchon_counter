@@ -29,7 +29,7 @@ class CreatePlayerForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                TranslationConstants.chooseColor.translate(context),
+                TranslationConstants.chooseColor.translate(),
                 style: TextStyle(color: Colors.white),
               ),
               BlocBuilder<CreatePlayerBloc, CreatePlayerState>(

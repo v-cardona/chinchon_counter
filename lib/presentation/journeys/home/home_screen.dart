@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TranslationConstants.appTitle.translate(context)),
+        title: Text(TranslationConstants.appTitle.translate()),
       ),
       body: Align(
         alignment: Alignment.center,

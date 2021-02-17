@@ -27,7 +27,7 @@ class DashboardButton extends StatelessWidget {
         child: FlatButton(
           onPressed: onPressed,
           child: Text(
-            text.translate(context),
+            text.translate(),
             style: Theme.of(context).textTheme.button,
           ),
         ));

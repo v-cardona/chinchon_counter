@@ -37,7 +37,7 @@ class _EditPlayerScreenState extends State<EditPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TranslationConstants.editPlayer),
+        title: Text(TranslationConstants.editPlayer.translate()),
       ),
       body: BlocListener(
         cubit: _editPlayerBloc,
@@ -79,16 +79,16 @@ class _EditPlayerScreenState extends State<EditPlayerScreen> {
     String error;
     switch (appError.errorType) {
       case AppErrorType.dba:
-        error = TranslationConstants.errorDb.translate(context);
+        error = TranslationConstants.errorDb.translate();
         break;
       case AppErrorType.colorNotAvailable:
-        error = TranslationConstants.errorcolorNotAvailable.translate(context);
+        error = TranslationConstants.errorcolorNotAvailable.translate();
         break;
       case AppErrorType.nameEmpty:
-        error = TranslationConstants.errornameEmpty.translate(context);
+        error = TranslationConstants.errornameEmpty.translate();
         break;
       default:
-        error = TranslationConstants.errorMsgGeneral.translate(context);
+        error = TranslationConstants.errorMsgGeneral.translate();
     }
 
     return Text(error);

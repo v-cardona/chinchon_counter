@@ -35,7 +35,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(TranslationConstants.players.translate(context)),
+          title: Text(TranslationConstants.players.translate()),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
@@ -60,7 +60,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
                 if (playersList.isEmpty) {
                   return Center(
                     child: Text(
-                      TranslationConstants.noPlayers.translate(context),
+                      TranslationConstants.noPlayers.translate(),
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
                     ),

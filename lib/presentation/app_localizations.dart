@@ -18,6 +18,8 @@ class AppLocalizations {
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
+
+  static AppLocalizations get instance => _AppLocalizationDelegate.instance;
    
   Future<bool> load() async {
     final String jsonString = await rootBundle
@@ -41,6 +43,8 @@ class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   const _AppLocalizationDelegate();
 
+  static AppLocalizations instance;
+
   @override
   bool isSupported(Locale locale) {
     return Languages.languages
@@ -54,6 +58,9 @@ class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
     
     AppLocalizations localizations = AppLocalizations(locale);
     await localizations.load();
+
+    instance = localizations;
+
     return localizations;
   }
 

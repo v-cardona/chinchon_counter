@@ -39,7 +39,7 @@ class EditPlayerForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                TranslationConstants.chooseColor.translate(context),
+                TranslationConstants.chooseColor.translate(),
                 style: TextStyle(color: Colors.white),
               ),
               BlocBuilder<EditPlayerBloc, EditPlayerState>(

@@ -28,7 +28,7 @@ class ColorPickerWidget extends StatelessWidget {
               ),
               actions: <Widget>[
                 FlatButton(
-                  child: Text(TranslationConstants.done.translate(context)),
+                  child: Text(TranslationConstants.done.translate()),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

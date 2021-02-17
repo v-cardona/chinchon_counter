@@ -23,7 +23,7 @@ class NameTextField extends StatelessWidget {
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           fillColor: Colors.white,
-          labelText: TranslationConstants.name.translate(context),
+          labelText: TranslationConstants.name.translate(),
           labelStyle: TextStyle(color: Colors.white),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.deepPurple, width: 2),
