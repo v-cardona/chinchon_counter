@@ -1,7 +1,7 @@
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
+import 'package:chinchon_counter/common/extensions/app_error_extension.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
-import 'package:chinchon_counter/domain/entities/app_error.dart';
 import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
 import 'package:chinchon_counter/presentation/journeys/create_player/create_player_form.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  getPlayerError(context, state.appEror),
+                  Text(state.appEror.showError()),
                   Icon(Icons.error)
                 ],
               ),
@@ -66,25 +66,5 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
         },
       ),
     );
-  }
-
-  // method to get which error is
-  Widget getPlayerError(BuildContext context, AppError appError) {
-    String error;
-    switch (appError.errorType) {
-      case AppErrorType.dba:
-        error = TranslationConstants.errorDb.translate();
-        break;
-      case AppErrorType.colorNotAvailable:
-        error = TranslationConstants.errorcolorNotAvailable.translate();
-        break;
-      case AppErrorType.nameEmpty:
-        error = TranslationConstants.errornameEmpty.translate();
-        break;
-      default:
-        error = TranslationConstants.errorMsgGeneral.translate();
-    }
-
-    return Text(error);
   }
 }
