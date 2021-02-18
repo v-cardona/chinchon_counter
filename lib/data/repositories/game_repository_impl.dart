@@ -47,7 +47,9 @@ class GameRepositoryImpl extends GameRepository {
         return Left(AppError(AppErrorType.nameEmpty));
       }
       List<int> colors = await localDataSource.getColorsPlayers();
-      if (colors.contains(playerEntity.color)) {
+      PlayerTable oldPlayer = await localDataSource.getPlayer(playerEntity.id);
+      List<int> colorsOtherPlayers = colors.where((element) => element != oldPlayer.color).toList();
+      if (colorsOtherPlayers.contains(playerEntity.color)) {
         return Left(AppError(AppErrorType.colorNotAvailable));
       }
       PlayerTable playerTable = PlayerTable.fromPlayerEntity(playerEntity);
