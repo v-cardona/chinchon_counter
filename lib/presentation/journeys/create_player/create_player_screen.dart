@@ -50,10 +50,7 @@ class _CreatePlayerScreenState extends State<CreatePlayerScreen> {
             Scaffold.of(context).showSnackBar(SnackBar(
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(state.appEror.showError()),
-                  Icon(Icons.error)
-                ],
+                children: [Text(state.appEror.showError()), Icon(Icons.error)],
               ),
               backgroundColor: Colors.red,
             ));

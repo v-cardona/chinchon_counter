@@ -9,6 +9,7 @@ class TranslationConstants {
   static const String editPlayer = 'editPlayer';
   static const String save = 'save';
   static const String players = 'players';
+  static const String selectPlayers = 'selectPlayers';
   static const String noPlayers = 'noPlayers';
   static const String name = 'name';
   static const String chooseColor = 'chooseColor';

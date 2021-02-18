@@ -20,5 +20,6 @@
   "yes": "SI",
   "areYouSure": "¿Estas seguro?",
   "reallyDeletePlayer": "¿Realmente quieres eliminar este jugador? No podrás volver a recuperarlo",
-  "deletedPlayer": "Jugador eliminado"
+  "deletedPlayer": "Jugador eliminado",
+  "selectPlayers": "Selecciona los jugadores"
 }

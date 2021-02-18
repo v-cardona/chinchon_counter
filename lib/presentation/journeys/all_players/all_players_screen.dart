@@ -70,7 +70,7 @@ class _AllPlayersScreenState extends State<AllPlayersScreen> {
                   return AllPlayersList(playersList: playersList);
                 }
               }
-              return const SizedBox.shrink();
+              return Center(child: const CircularProgressIndicator());
             },
           ),
         ));

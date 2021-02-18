@@ -2,6 +2,7 @@ import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/presentation/journeys/all_players/all_players_screen.dart';
 import 'package:chinchon_counter/presentation/journeys/home/dashboard_button.dart';
+import 'package:chinchon_counter/presentation/journeys/select_players_game/select_players_game_screen.dart';
 import 'package:chinchon_counter/presentation/themes/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,8 @@ class HomeScreen extends StatelessWidget {
                   AppColor.tulipTree,
                   AppColor.husk
                 ],
-                onPressed: () {}),
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SelectPlayersGameScreen(),))),
             DashboardButton(
                 text: TranslationConstants.allPlayers,
                 colorsGradient: [
