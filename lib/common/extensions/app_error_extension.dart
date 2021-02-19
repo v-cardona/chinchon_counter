@@ -3,7 +3,6 @@ import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/domain/entities/app_error.dart';
 
 extension AppErrorExtension on AppError {
-
   String showError() {
     String error;
     switch (this.errorType) {
@@ -15,6 +14,12 @@ extension AppErrorExtension on AppError {
         break;
       case AppErrorType.nameEmpty:
         error = TranslationConstants.errornameEmpty.translate();
+        break;
+      case AppErrorType.minPlayers:
+        error = TranslationConstants.errorMinPlayers.translate();
+        break;
+      case AppErrorType.maxPlayers:
+        error = TranslationConstants.errorMaxPlayers.translate();
         break;
       default:
         error = TranslationConstants.errorMsgGeneral.translate();

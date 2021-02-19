@@ -6,7 +6,11 @@ class SelectPlayersState extends Equatable {
   final AppError appError;
   final SelectPlayerStatus status;
 
-  const SelectPlayersState({this.selectedPlayers, this.players, this.appError, this.status = SelectPlayerStatus.initial});
+  const SelectPlayersState(
+      {this.selectedPlayers,
+      this.players,
+      this.appError,
+      this.status = SelectPlayerStatus.initial});
 
   @override
   List<Object> get props => [players, appError, status];
@@ -25,4 +29,11 @@ class SelectPlayersState extends Equatable {
   }
 }
 
-enum SelectPlayerStatus { initial, loading, loaded, selectedPlayers, error }
+enum SelectPlayerStatus {
+  initial,
+  loading,
+  loaded,
+  selectedPlayers,
+  error,
+  errorGameOptions
+}

@@ -25,4 +25,6 @@ class TranslationConstants {
   static const String errorDb = 'errorDb';
   static const String errorcolorNotAvailable = 'errorcolorNotAvailable';
   static const String errornameEmpty = 'errornameEmpty';
+  static const String errorMinPlayers = 'errorMinPlayers';
+  static const String errorMaxPlayers = 'errorMaxPlayers';
 }

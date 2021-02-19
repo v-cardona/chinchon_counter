@@ -47,7 +47,8 @@ class _SelectPlayersGameScreenState extends State<SelectPlayersGameScreen> {
               // hide previous snackbars
               Scaffold.of(context).hideCurrentSnackBar();
 
-              if (state.status == SelectPlayerStatus.error) {
+              if (state.status == SelectPlayerStatus.error ||
+                  state.status == SelectPlayerStatus.errorGameOptions) {
                 Scaffold.of(context).showSnackBar(SnackBar(
                   content: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,16 +60,20 @@ class _SelectPlayersGameScreenState extends State<SelectPlayersGameScreen> {
                   backgroundColor: Colors.red,
                 ));
               } else if (state.status == SelectPlayerStatus.selectedPlayers) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => OptionsGameScreen(
-                    playersSelected: state.selectedPlayers,
-                  ),
-                )).then((value) => _selectPlayersBloc.add(RefreshPlayersEvent()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                      builder: (context) => OptionsGameScreen(
+                        playersSelected: state.selectedPlayers,
+                      ),
+                    ))
+                    .then((value) =>
+                        _selectPlayersBloc.add(RefreshPlayersEvent()));
               }
             },
             child: BlocBuilder<SelectPlayersBloc, SelectPlayersState>(
               builder: (context, state) {
-                if (state.status == SelectPlayerStatus.loaded) {
+                if (state.status == SelectPlayerStatus.loaded ||
+                    state.status == SelectPlayerStatus.errorGameOptions) {
                   List<PlayerCheckEntity> playersList = state.players;
                   if (playersList.isEmpty) {
                     return Center(
