@@ -8,6 +8,7 @@ import 'package:chinchon_counter/domain/usecases/get_players.dart';
 import 'package:chinchon_counter/presentation/bloc/create_player/create_player_bloc.dart';
 import 'package:chinchon_counter/presentation/bloc/edit_player/edit_player_bloc.dart';
 import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/select_lifes_game/select_lifes_game_bloc.dart';
 import 'package:chinchon_counter/presentation/bloc/select_players/select_players_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -33,12 +34,13 @@ Future init() async {
       .registerLazySingleton<GetPlayers>(() => GetPlayers(getItInstance()));
 
   // blocs
-  getItInstance.registerFactory(() =>
-      PlayerBloc(getPlayers: getItInstance()));
-  getItInstance.registerFactory(() =>
-      CreatePlayerBloc(createPlayer: getItInstance()));
-  getItInstance.registerFactory(() =>
-      EditPlayerBloc(editPlayer: getItInstance(), deletePlayer: getItInstance()));
-  getItInstance.registerFactory(() =>
-      SelectPlayersBloc(getPlayers: getItInstance(),));
+  getItInstance.registerFactory(() => PlayerBloc(getPlayers: getItInstance()));
+  getItInstance
+      .registerFactory(() => CreatePlayerBloc(createPlayer: getItInstance()));
+  getItInstance.registerFactory(() => EditPlayerBloc(
+      editPlayer: getItInstance(), deletePlayer: getItInstance()));
+  getItInstance.registerFactory(() => SelectPlayersBloc(
+        getPlayers: getItInstance(),
+      ));
+  getItInstance.registerFactory(() => SelectLifesGameBloc());
 }
