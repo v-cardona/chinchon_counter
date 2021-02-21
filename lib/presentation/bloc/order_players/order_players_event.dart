@@ -29,3 +29,12 @@ class MovePlayerOrderEvent extends OrderPlayersEvent {
   @override
   List<Object> get props => [players, oldIndex, newIndex];
 }
+
+class DeletedPlayerEvent extends OrderPlayersEvent {
+  final PlayerEntity player;
+
+  DeletedPlayerEvent({@required this.player});
+
+  @override
+  List<Object> get props => [player];
+}

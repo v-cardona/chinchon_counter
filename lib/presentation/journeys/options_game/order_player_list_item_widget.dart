@@ -3,8 +3,10 @@ import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
+import 'package:chinchon_counter/presentation/bloc/order_players/order_players_bloc.dart';
 import 'package:chinchon_counter/presentation/widgets/user_color_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderPlayerListItem extends StatelessWidget {
   final PlayerEntity player;
@@ -31,9 +33,22 @@ class OrderPlayerListItem extends StatelessWidget {
             ),
             backgroundColor: Colors.deepPurple,
           )),
-          trailing: Icon(
-            Icons.menu,
-            color: Colors.white,
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.red[200],
+                ),
+                onPressed: () => BlocProvider.of<OrderPlayersBloc>(context)
+                    .add(DeletedPlayerEvent(player: player)),
+              ),
+              Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+            ],
           ),
           title: Text(
             player.name,

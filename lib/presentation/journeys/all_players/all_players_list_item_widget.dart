@@ -26,7 +26,6 @@ class AllPlayersListItem extends StatelessWidget {
             ),
           ))
               .then((value) {
-            print(value);
             BlocProvider.of<PlayerBloc>(context).add(GetAllPlayersEvent());
             if (value == 'deleted') {
               Scaffold.of(context).showSnackBar(SnackBar(

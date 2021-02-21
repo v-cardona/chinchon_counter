@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:chinchon_counter/domain/entities/app_error.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class OrderPlayersBloc extends Bloc<OrderPlayersEvent, OrderPlayersState> {
     OrderPlayersEvent event,
   ) async* {
     if (event is InitOrderPlayerEvent) {
-      yield state.copyWith(players: event.players);
+      yield state.copyWith(
+          players: event.players, status: OrderPlayerStatus.loaded);
     } else if (event is MovePlayerOrderEvent) {
       List<PlayerEntity> oldList = event.players;
       int oldIndex = event.oldIndex;
@@ -26,10 +28,24 @@ class OrderPlayersBloc extends Bloc<OrderPlayersEvent, OrderPlayersState> {
       }
       PlayerEntity oldPlayer = oldList.removeAt(oldIndex);
       oldList.insert(newIndex, oldPlayer);
-      oldList.forEach((element) {
-        print(element.name);
-      });
-      yield state.copyWith(players: oldList, nUpdates: state.nUpdates + 1);
+      yield state.copyWith(
+          players: oldList,
+          nUpdates: state.nUpdates + 1,
+          status: OrderPlayerStatus.loaded);
+    } else if (event is DeletedPlayerEvent) {
+      List<PlayerEntity> oldList = state.players;
+      if (oldList.length == 2) {
+        yield state.copyWith(
+            status: OrderPlayerStatus.error,
+            nUpdates: state.nUpdates + 1,
+            appError: AppError(AppErrorType.minPlayers));
+      } else {
+        oldList.remove(event.player);
+        yield state.copyWith(
+            players: oldList,
+            nUpdates: state.nUpdates + 1,
+            status: OrderPlayerStatus.loaded);
+      }
     }
   }
 }

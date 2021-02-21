@@ -1,6 +1,4 @@
-import 'package:chinchon_counter/common/constants/size_constants.dart';
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
-import 'package:chinchon_counter/common/extensions/size_extensions.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
@@ -10,7 +8,6 @@ import 'package:chinchon_counter/presentation/journeys/options_game/options_game
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'order_player_list_item_widget.dart';
 import 'order_players_widget.dart';
 
 class OptionsGameScreen extends StatefulWidget {
