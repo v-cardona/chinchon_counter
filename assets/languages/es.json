@@ -19,11 +19,13 @@
   "errorMaxPlayers": "El nº máximo de jugadores es 6",
   "chooseColor": "Elige un color:",
   "chooseLifes": "Elige el número de vidas:",
+  "orderPlayers": "Ordena los jugadores:",
   "done": "Hecho",
   "no": "NO",
   "yes": "SI",
   "areYouSure": "¿Estas seguro?",
   "reallyDeletePlayer": "¿Realmente quieres eliminar este jugador? No podrás volver a recuperarlo",
   "deletedPlayer": "Jugador eliminado",
+  "longPressOrderPlayers": "Mantén pulsado para mover al jugador",
   "selectPlayers": "Selecciona los jugadores"
 }

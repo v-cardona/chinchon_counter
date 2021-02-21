@@ -15,6 +15,8 @@ class TranslationConstants {
   static const String name = 'name';
   static const String chooseColor = 'chooseColor';
   static const String chooseLifes = 'chooseLifes';
+  static const String orderPlayers = 'orderPlayers';
+  static const String longPressOrderPlayers = 'longPressOrderPlayers';
   static const String done = 'done';
   static const String no = 'no';
   static const String yes = 'yes';
