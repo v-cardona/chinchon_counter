@@ -13,24 +13,24 @@ class ChinchonCounterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: TranslationConstants.appTitle,
-        theme: ThemeData(
+      debugShowCheckedModeBanner: false,
+      title: TranslationConstants.appTitle,
+      theme: ThemeData(
           primaryColor: AppColor.mulledWine,
           accentColor: AppColor.screaminGreen,
           scaffoldBackgroundColor: AppColor.vulcan,
           unselectedWidgetColor: AppColor.screaminGreen,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          cursorColor: Colors.deepPurple
-        ),
-        supportedLocales:
-            Languages.languages.map((e) => Locale(e.code)).toList(),
-        locale: Locale('es'),
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
-        ],
-        home: HomeScreen());
+          cursorColor: Colors.deepPurple),
+      supportedLocales: Languages.languages.map((e) => Locale(e.code)).toList(),
+      locale: Locale('es'),
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      initialRoute: '/',
+      routes: {'/': (context) => HomeScreen()},
+    );
   }
 }
