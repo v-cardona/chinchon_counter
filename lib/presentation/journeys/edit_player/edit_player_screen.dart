@@ -43,7 +43,7 @@ class _EditPlayerScreenState extends State<EditPlayerScreen> {
           IconButton(
               icon: Icon(
                 Icons.delete,
-                color: Colors.white,
+                color: Colors.red[200],
               ),
               onPressed: () => showDialog(
                   context: context,
