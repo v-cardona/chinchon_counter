@@ -13,7 +13,7 @@ class OrderPlayersState extends Equatable {
       this.nUpdates = 0});
 
   @override
-  List<Object> get props => [players, nUpdates];
+  List<Object> get props => [players, nUpdates, status, appError];
 
   OrderPlayersState copyWith(
       {List<PlayerEntity> players,

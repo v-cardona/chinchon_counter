@@ -61,10 +61,16 @@ class _OptionsGameScreenState extends State<OptionsGameScreen> {
               Button(
                   text: TranslationConstants.play,
                   onPressed: () {
+                    int lifes = _selectLifesGameBloc.state.props[0];
+                    List<PlayerEntity> players =
+                        _orderPlayersBloc.state.props[0];
                     Navigator.of(context).popUntil(ModalRoute.withName('/'));
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => GameScreen(),
+                        builder: (context) => GameScreen(
+                          initialLifes: lifes,
+                          players: players,
+                        ),
                       ),
                     );
                   })
