@@ -1,6 +1,7 @@
 import 'package:chinchon_counter/data/tables/player_table.dart';
 import 'package:chinchon_counter/presentation/chinchon_counter_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:pedantic/pedantic.dart';
 import 'di/get_it.dart' as getIt;
@@ -10,6 +11,8 @@ import 'common/screenutil/screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  unawaited(
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
   // initialize dependency injection
   unawaited(getIt.init());
   // Initialize ScreenUtil so that it can use it while defining
