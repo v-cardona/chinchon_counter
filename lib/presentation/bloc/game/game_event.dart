@@ -16,3 +16,12 @@ class InitGameEvent extends GameEvent {
   @override
   List<Object> get props => [lifes, players];
 }
+
+class AddPointsHand extends GameEvent {
+  final List<int> points;
+
+  AddPointsHand({@required this.points});
+
+  @override
+  List<Object> get props => [points];
+}

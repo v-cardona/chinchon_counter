@@ -4,6 +4,7 @@ import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/game/game_bloc.dart';
 import 'package:chinchon_counter/presentation/journeys/game/puntuation_table_set.dart';
+import 'package:chinchon_counter/presentation/journeys/points_hand/points_hand_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -49,7 +50,13 @@ class _GameScreenState extends State<GameScreen> {
         child: PuntuationTableSet(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+                  value: _gameBloc,
+                  child: PointsHandScreen(
+                    players: widget.players,
+                  ),
+                ))),
         child: Icon(Icons.add),
       ),
     );

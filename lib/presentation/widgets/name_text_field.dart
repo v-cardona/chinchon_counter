@@ -5,11 +5,11 @@ import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 class NameTextField extends StatelessWidget {
-
   final String initialText;
   final Function onPressed;
 
-  const NameTextField({Key key, this.initialText = '', this.onPressed}) : super(key: key);
+  const NameTextField({Key key, this.initialText = '', this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

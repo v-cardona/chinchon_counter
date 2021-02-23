@@ -16,10 +16,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     GameEvent event,
   ) async* {
     if (event is InitGameEvent) {
-      List<List<int>> pointsActualSet = [
-        List.filled(event.players.length, 12),
-        List.filled(event.players.length, -10)
-      ];
+      List<List<int>> pointsActualSet = [];
       List<List<int>> pointsSets = [List.filled(event.players.length, 0)];
       List<int> lifes = List.filled(event.players.length, event.lifes);
       yield state.copyWith(
@@ -30,6 +27,20 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           pointsActualSet: pointsActualSet,
           pointsSets: pointsSets,
           lifes: lifes,
+          status: GameStatus.loaded);
+    } else if (event is AddPointsHand) {
+      List<List<int>> pointsActualSet = state.pointsActualSet;
+      pointsActualSet.add(event.points);
+
+      List<List<int>> pointsSets = state.pointsSets;
+      for (int i = 0; i < pointsSets[state.actualSet].length; i++) {
+        pointsSets[state.actualSet][i] += event.points[i];
+      }
+      int actualHand = state.actualHand + 1;
+      yield state.copyWith(
+          actualHand: actualHand,
+          pointsActualSet: pointsActualSet,
+          pointsSets: pointsSets,
           status: GameStatus.loaded);
     }
   }
