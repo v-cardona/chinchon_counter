@@ -7,10 +7,12 @@ class TranslationConstants {
   static const String allPlayers = 'allPlayers';
   static const String createPlayer = 'createPlayer';
   static const String editPlayer = 'editPlayer';
+  static const String editPoints = 'editPoints';
   static const String optionsGame = 'optionsGame';
   static const String addPoints = 'addPoints';
   static const String play = 'play';
   static const String save = 'save';
+  static const String cancel = 'cancel';
   static const String players = 'players';
   static const String selectPlayers = 'selectPlayers';
   static const String noPlayers = 'noPlayers';

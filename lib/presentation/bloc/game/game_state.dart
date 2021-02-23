@@ -1,6 +1,7 @@
 part of 'game_bloc.dart';
 
 class GameState extends Equatable {
+  final int nUpdates; // necesario para indicar el cambio de estado
   final int initialLifes;
   final int actualHand;
   final int actualSet;
@@ -11,7 +12,8 @@ class GameState extends Equatable {
   final GameStatus status;
 
   const GameState(
-      {this.initialLifes,
+      {this.nUpdates = 0,
+      this.initialLifes,
       this.actualSet,
       this.actualHand,
       this.players,
@@ -22,6 +24,7 @@ class GameState extends Equatable {
 
   @override
   List<Object> get props => [
+        nUpdates,
         initialLifes,
         actualHand,
         actualSet,
@@ -33,7 +36,8 @@ class GameState extends Equatable {
       ];
 
   GameState copyWith(
-      {int initialLifes,
+      {int nUpdates,
+      int initialLifes,
       int actualSet,
       int actualHand,
       List<PlayerEntity> players,
@@ -42,6 +46,7 @@ class GameState extends Equatable {
       List<int> lifes,
       GameStatus status}) {
     return GameState(
+      nUpdates: nUpdates ?? this.nUpdates,
       initialLifes: initialLifes ?? this.initialLifes,
       actualSet: actualSet ?? this.actualSet,
       actualHand: actualHand ?? this.actualHand,

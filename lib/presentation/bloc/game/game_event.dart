@@ -25,3 +25,17 @@ class AddPointsHand extends GameEvent {
   @override
   List<Object> get props => [points];
 }
+
+class EditPointsHand extends GameEvent {
+  final int points;
+  final int indexHand;
+  final int indexPlayer;
+
+  EditPointsHand(
+      {@required this.indexHand,
+      @required this.indexPlayer,
+      @required this.points});
+
+  @override
+  List<Object> get props => [points, indexHand, indexPlayer];
+}
