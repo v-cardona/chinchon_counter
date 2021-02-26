@@ -37,6 +37,7 @@ class PuntuationTableSet extends StatelessWidget {
             showGameFinishedResume: false,
             headingRowColor: AppColor.mulledWine,
             editCell: true,
+            showCroupier: true,
           );
         }
         return Center(child: CircularProgressIndicator());

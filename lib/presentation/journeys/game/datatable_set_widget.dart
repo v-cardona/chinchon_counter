@@ -14,6 +14,8 @@ class DatatableSetWidget extends StatelessWidget {
   final bool showGameFinishedResume;
   final Color headingRowColor;
   final bool editCell;
+  final bool showCroupier;
+
   const DatatableSetWidget({
     Key key,
     @required this.state,
@@ -21,6 +23,7 @@ class DatatableSetWidget extends StatelessWidget {
     @required this.showGameFinishedResume,
     this.showLifes = false,
     this.editCell = false,
+    this.showCroupier = false,
   }) : super(key: key);
 
   @override
@@ -32,7 +35,7 @@ class DatatableSetWidget extends StatelessWidget {
         child: DataTable(
           headingRowColor:
               MaterialStateColor.resolveWith((states) => headingRowColor),
-          columns: _createColumns(state),
+          columns: _createColumns(state, context, showCroupier),
           rows: [
             // lifes
             if (showLifes) _createLifesRow(state),
@@ -110,19 +113,31 @@ class DatatableSetWidget extends StatelessWidget {
     );
   }
 
-  List<DataColumn> _createColumns(GameState state) {
+  List<DataColumn> _createColumns(
+      GameState state, BuildContext context, bool showCroupier) {
     List<DataColumn> columns = [];
     for (int i = 0; i < state.players.length; i++) {
       PlayerEntity player = state.players[i];
       DataColumn column = DataColumn(
           label: Expanded(
-            child: Text(
-              player.name,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: Sizes.dimen_18.sp,
-              ),
-              textAlign: TextAlign.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  player.name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.dimen_18.sp,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                if (showCroupier &&
+                    i == state.actualHand % state.players.length)
+                  Container(
+                    color: Theme.of(context).accentColor,
+                    height: Sizes.dimen_4,
+                  )
+              ],
             ),
           ),
           numeric: false);
