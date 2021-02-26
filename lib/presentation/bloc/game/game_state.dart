@@ -10,6 +10,8 @@ class GameState extends Equatable {
   final List<List<int>> pointsActualSet;
   final List<List<int>> pointsSets;
   final List<int> lifes;
+  final PlayerEntity loser;
+  final PlayerEntity winner;
   final GameStatus status;
 
   const GameState(
@@ -22,6 +24,8 @@ class GameState extends Equatable {
       this.pointsActualSet,
       this.pointsSets,
       this.lifes,
+      this.loser,
+      this.winner,
       this.status = GameStatus.initial});
 
   @override
@@ -35,6 +39,8 @@ class GameState extends Equatable {
         pointsActualSet,
         pointsSets,
         lifes,
+        loser,
+        winner,
         status
       ];
 
@@ -48,6 +54,8 @@ class GameState extends Equatable {
       List<List<int>> pointsActualSet,
       List<List<int>> pointsSets,
       List<int> lifes,
+      PlayerEntity loser,
+      PlayerEntity winner,
       GameStatus status}) {
     return GameState(
       nUpdates: nUpdates ?? this.nUpdates,
@@ -59,9 +67,11 @@ class GameState extends Equatable {
       pointsActualSet: pointsActualSet ?? this.pointsActualSet,
       pointsSets: pointsSets ?? this.pointsSets,
       lifes: lifes ?? this.lifes,
+      loser: loser ?? this.loser,
+      winner: winner ?? this.winner,
       status: status ?? this.status,
     );
   }
 }
 
-enum GameStatus { initial, loading, loaded, finishedSet }
+enum GameStatus { initial, loading, loaded, finishedSet, finishedGame }

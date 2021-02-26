@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColor {
   const AppColor._();
-  
+
   static const Color vulcan = Color(0xFF141221);
   static const Color mulledWine = Color(0xFF433E60);
   static const Color sunglow = Color(0xFFFFC138);
@@ -15,4 +15,6 @@ class AppColor {
   static const Color screaminGreen = Color(0xFF5AFC5E);
   static const Color royalBlue = Color(0xFF604FEF);
   static const Color violet = Color(0xFFA74DBC);
+  static const Color celery = Color(0xFFBCBC4D);
+  static const Color chestnut = Color(0xFFBC4D4D);
 }

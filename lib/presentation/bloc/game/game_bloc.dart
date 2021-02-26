@@ -60,17 +60,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           pointsSets: pointsSets,
           status: GameStatus.loaded);
     } else if (event is NextSet) {
-      List<int> pointsSetsInitial = List.filled(state.players.length, 0);
-      List<List<int>> pointsSets = state.pointsSets;
-      List<List<int>> pointsActualSet = [];
-      pointsSets.add(pointsSetsInitial);
-
-      yield state.copyWith(
-          nUpdates: state.nUpdates + 1,
-          pointsActualSet: pointsActualSet,
-          pointsSets: pointsSets,
-          actualSet: state.actualSet + 1,
-          status: GameStatus.loaded);
+      yield* _checkGameFinished();
     }
   }
 
@@ -92,6 +82,54 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           lostLifesPlayers: lostLifesPlayers,
           nUpdates: state.nUpdates + 1,
           status: GameStatus.finishedSet);
+    }
+  }
+
+  Stream<GameState> _checkGameFinished() async* {
+    List<int> pointsSet = state.pointsSets[state.actualSet];
+    List<int> lifes = state.lifes;
+    PlayerEntity loser;
+    PlayerEntity winner;
+    int maxPointsSet = 0;
+    int maxLifes = 0;
+    double minPointsSet = double.maxFinite;
+    bool gameFinished = false;
+
+    for (int i = 0; i < lifes.length; i++) {
+      if (GameConstants.lifes_lost == lifes[i]) {
+        gameFinished = true;
+        if (maxPointsSet <= pointsSet[i]) {
+          loser = state.players[i];
+          maxPointsSet = pointsSet[i];
+        }
+      }
+
+      if (maxLifes < lifes[i]) {
+        if (pointsSet[i] <= minPointsSet) {
+          winner = state.players[i];
+          minPointsSet = pointsSet[i].toDouble();
+        }
+      }
+    }
+
+    if (gameFinished) {
+      yield state.copyWith(
+          loser: loser,
+          winner: winner,
+          nUpdates: state.nUpdates + 1,
+          status: GameStatus.finishedGame);
+    } else {
+      List<int> pointsSetsInitial = List.filled(state.players.length, 0);
+      List<List<int>> pointsSets = state.pointsSets;
+      List<List<int>> pointsActualSet = [];
+      pointsSets.add(pointsSetsInitial);
+
+      yield state.copyWith(
+          nUpdates: state.nUpdates + 1,
+          pointsActualSet: pointsActualSet,
+          pointsSets: pointsSets,
+          actualSet: state.actualSet + 1,
+          status: GameStatus.loaded);
     }
   }
 }

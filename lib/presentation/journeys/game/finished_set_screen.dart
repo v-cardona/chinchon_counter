@@ -58,6 +58,7 @@ class FinishedSetScreen extends StatelessWidget {
                   child: DatatableSetWidget(
                     state: state,
                     headingRowColor: AppColor.vulcan,
+                    showGameFinishedResume: false,
                   ),
                 ),
               ],
@@ -66,7 +67,7 @@ class FinishedSetScreen extends StatelessWidget {
           Align(
               alignment: Alignment.bottomCenter,
               child: Button(
-                  text: TranslationConstants.done,
+                  text: TranslationConstants.continueBtn,
                   onPressed: () {
                     BlocProvider.of<GameBloc>(context).add(NextSet());
                     Navigator.of(context).pop();

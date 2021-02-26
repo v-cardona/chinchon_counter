@@ -5,6 +5,8 @@ import 'package:chinchon_counter/presentation/themes/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'finished_game_screen.dart';
+
 class PuntuationTableSet extends StatelessWidget {
   const PuntuationTableSet({Key key}) : super(key: key);
 
@@ -18,6 +20,13 @@ class PuntuationTableSet extends StatelessWidget {
                     value: BlocProvider.of<GameBloc>(context),
                     child: FinishedSetScreen(),
                   )));
+        } else if (state.status == GameStatus.finishedGame) {
+          Navigator.of(context).popUntil(ModalRoute.withName('/'));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                    value: BlocProvider.of<GameBloc>(context),
+                    child: FinishedGameScreen(),
+                  )));
         }
       },
       builder: (_, state) {
@@ -25,6 +34,7 @@ class PuntuationTableSet extends StatelessWidget {
           return DatatableSetWidget(
             state: state,
             showLifes: true,
+            showGameFinishedResume: false,
             headingRowColor: AppColor.mulledWine,
             editCell: true,
           );

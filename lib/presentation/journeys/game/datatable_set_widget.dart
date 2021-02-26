@@ -11,15 +11,17 @@ import 'edit_puntuation_hand_dialog.dart';
 class DatatableSetWidget extends StatelessWidget {
   final GameState state;
   final bool showLifes;
+  final bool showGameFinishedResume;
   final Color headingRowColor;
   final bool editCell;
-  const DatatableSetWidget(
-      {Key key,
-      @required this.state,
-      @required this.headingRowColor,
-      this.showLifes = false,
-      this.editCell = false})
-      : super(key: key);
+  const DatatableSetWidget({
+    Key key,
+    @required this.state,
+    @required this.headingRowColor,
+    @required this.showGameFinishedResume,
+    this.showLifes = false,
+    this.editCell = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,48 +36,73 @@ class DatatableSetWidget extends StatelessWidget {
           rows: [
             // lifes
             if (showLifes) _createLifesRow(state),
-            // sum points of set
-            _createTotalPoints(state),
-            // hands
-            for (int i = 0; i < state.pointsActualSet.length; i++)
-              DataRow(
-                cells: [
-                  for (int j = 0; j < state.pointsActualSet[i].length; j++)
+            if (showGameFinishedResume)
+              for (int i = 0; i < state.pointsSets.length; i++)
+                DataRow(cells: [
+                  for (int j = 0; j < state.pointsSets[i].length; j++)
                     DataCell(
-                        Center(
-                          child: Text(
-                            '${state.pointsActualSet[i][j]}',
-                            style: TextStyle(
-                              color: AppColor.violet,
-                              fontSize: Sizes.dimen_20.sp,
-                            ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: Sizes.dimen_3.h),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Sizes.dimen_8.w),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.deepPurple),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(Sizes.dimen_5))),
+                        child: Center(
+                            child: Text(
+                          '${state.pointsSets[i][j]}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Sizes.dimen_20.sp,
                           ),
-                        ), onTap: () {
-                      if (editCell) {
-                        String name = state.players[j].name;
-                        int color = state.players[j].color;
-                        int actualPoints = state.pointsActualSet[i][j];
-                        int indexHand = i;
-                        int indexPlayer = j;
-                        showDialog(
-                            context: context,
-                            child: EditPuntuationHandEdit(
-                              actualPoints: actualPoints,
-                              color: color,
-                              name: name,
-                            )).then((value) {
-                          if (value != null) {
-                            BlocProvider.of<GameBloc>(context).add(
-                                EditPointsHand(
-                                    points: value,
-                                    indexHand: indexHand,
-                                    indexPlayer: indexPlayer));
-                          }
-                        });
-                      }
-                    })
-                ],
-              )
+                        )),
+                      ),
+                    ),
+                ]),
+            // sum points of set
+            if (!showGameFinishedResume) _createTotalPoints(state),
+            // hands
+            if (!showGameFinishedResume)
+              for (int i = 0; i < state.pointsActualSet.length; i++)
+                DataRow(
+                  cells: [
+                    for (int j = 0; j < state.pointsActualSet[i].length; j++)
+                      DataCell(
+                          Center(
+                            child: Text(
+                              '${state.pointsActualSet[i][j]}',
+                              style: TextStyle(
+                                color: AppColor.violet,
+                                fontSize: Sizes.dimen_20.sp,
+                              ),
+                            ),
+                          ), onTap: () {
+                        if (editCell) {
+                          String name = state.players[j].name;
+                          int color = state.players[j].color;
+                          int actualPoints = state.pointsActualSet[i][j];
+                          int indexHand = i;
+                          int indexPlayer = j;
+                          showDialog(
+                              context: context,
+                              child: EditPuntuationHandEdit(
+                                actualPoints: actualPoints,
+                                color: color,
+                                name: name,
+                              )).then((value) {
+                            if (value != null) {
+                              BlocProvider.of<GameBloc>(context).add(
+                                  EditPointsHand(
+                                      points: value,
+                                      indexHand: indexHand,
+                                      indexPlayer: indexPlayer));
+                            }
+                          });
+                        }
+                      })
+                  ],
+                )
           ],
           columnSpacing: Sizes.dimen_20.w,
         ),
@@ -135,6 +162,7 @@ class DatatableSetWidget extends StatelessWidget {
       int setPoints = state.pointsSets[state.actualSet][i];
       DataCell cell = DataCell(
         Container(
+          padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_8.w),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.deepPurple),
               borderRadius: BorderRadius.all(Radius.circular(Sizes.dimen_5))),

@@ -17,14 +17,17 @@ class TranslationConstants {
   static const String selectPlayers = 'selectPlayers';
   static const String noPlayers = 'noPlayers';
   static const String finishedSet = 'finishedSet';
+  static const String finishedGame = 'finishedGame';
   static const String lostLifes = 'lostLifes';
   static const String setResumen = 'setResumen';
+  static const String gameResumen = 'gameResumen';
   static const String name = 'name';
   static const String chooseColor = 'chooseColor';
   static const String chooseLifes = 'chooseLifes';
   static const String orderPlayers = 'orderPlayers';
   static const String longPressOrderPlayers = 'longPressOrderPlayers';
   static const String done = 'done';
+  static const String continueBtn = 'continueBtn';
   static const String no = 'no';
   static const String yes = 'yes';
   static const String areYouSure = 'areYouSure';

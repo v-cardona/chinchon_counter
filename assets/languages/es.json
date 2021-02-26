@@ -24,6 +24,7 @@
   "chooseLifes": "Elige el número de vidas:",
   "orderPlayers": "Ordena los jugadores:",
   "done": "Hecho",
+  "continueBtn": "Continuar",
   "cancel": "CANCEL",
   "no": "NO",
   "yes": "SI",
@@ -33,6 +34,8 @@
   "longPressOrderPlayers": "Mantén pulsado para mover al jugador",
   "selectPlayers": "Selecciona los jugadores",
   "finishedSet": "Ronda finalizada",
+  "finishedGame": "Juego finalizado",
   "lostLifes": "Vida/s perdida/s:",
-  "setResumen": "Resumen de la ronda: "
+  "setResumen": "Resumen de la ronda: ",
+  "gameResumen": "Resumen de la partida: "
 }
