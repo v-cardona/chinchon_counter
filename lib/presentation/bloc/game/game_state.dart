@@ -6,6 +6,7 @@ class GameState extends Equatable {
   final int actualHand;
   final int actualSet;
   final List<PlayerEntity> players;
+  final List<PlayerEntity> lostLifesPlayers;
   final List<List<int>> pointsActualSet;
   final List<List<int>> pointsSets;
   final List<int> lifes;
@@ -17,6 +18,7 @@ class GameState extends Equatable {
       this.actualSet,
       this.actualHand,
       this.players,
+      this.lostLifesPlayers,
       this.pointsActualSet,
       this.pointsSets,
       this.lifes,
@@ -29,6 +31,7 @@ class GameState extends Equatable {
         actualHand,
         actualSet,
         players,
+        lostLifesPlayers,
         pointsActualSet,
         pointsSets,
         lifes,
@@ -41,6 +44,7 @@ class GameState extends Equatable {
       int actualSet,
       int actualHand,
       List<PlayerEntity> players,
+      List<PlayerEntity> lostLifesPlayers,
       List<List<int>> pointsActualSet,
       List<List<int>> pointsSets,
       List<int> lifes,
@@ -51,6 +55,7 @@ class GameState extends Equatable {
       actualSet: actualSet ?? this.actualSet,
       actualHand: actualHand ?? this.actualHand,
       players: players ?? this.players,
+      lostLifesPlayers: lostLifesPlayers ?? this.lostLifesPlayers,
       pointsActualSet: pointsActualSet ?? this.pointsActualSet,
       pointsSets: pointsSets ?? this.pointsSets,
       lifes: lifes ?? this.lifes,
@@ -59,4 +64,4 @@ class GameState extends Equatable {
   }
 }
 
-enum GameStatus { initial, loading, loaded, nextHand }
+enum GameStatus { initial, loading, loaded, finishedSet }

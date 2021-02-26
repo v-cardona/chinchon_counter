@@ -4,7 +4,7 @@ class PointsHandState extends Equatable {
   final List<int> points;
   final PointsHandStatus status;
 
-  const PointsHandState({this.status, this.points});
+  const PointsHandState({this.status = PointsHandStatus.initial, this.points});
 
   @override
   List<Object> get props => [points, status];

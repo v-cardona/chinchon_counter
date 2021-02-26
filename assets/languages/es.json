@@ -31,5 +31,8 @@
   "reallyDeletePlayer": "¿Realmente quieres eliminar este jugador? No podrás volver a recuperarlo",
   "deletedPlayer": "Jugador eliminado",
   "longPressOrderPlayers": "Mantén pulsado para mover al jugador",
-  "selectPlayers": "Selecciona los jugadores"
+  "selectPlayers": "Selecciona los jugadores",
+  "finishedSet": "Ronda finalizada",
+  "lostLifes": "Vida/s perdida/s:",
+  "setResumen": "Resumen de la ronda: "
 }

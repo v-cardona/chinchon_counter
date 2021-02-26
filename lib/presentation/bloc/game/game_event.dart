@@ -39,3 +39,5 @@ class EditPointsHand extends GameEvent {
   @override
   List<Object> get props => [points, indexHand, indexPlayer];
 }
+
+class NextSet extends GameEvent {}
