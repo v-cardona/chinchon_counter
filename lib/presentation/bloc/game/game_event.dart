@@ -9,9 +9,10 @@ abstract class GameEvent extends Equatable {
 
 class InitGameEvent extends GameEvent {
   final int lifes;
+  final int croupier;
   final List<PlayerEntity> players;
 
-  InitGameEvent({@required this.lifes, @required this.players});
+  InitGameEvent({@required this.lifes, @required this.players, this.croupier});
 
   @override
   List<Object> get props => [lifes, players];

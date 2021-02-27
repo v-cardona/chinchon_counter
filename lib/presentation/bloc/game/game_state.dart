@@ -4,6 +4,7 @@ class GameState extends Equatable {
   final int nUpdates; // necesario para indicar el cambio de estado
   final int initialLifes;
   final int actualHand;
+  final int croupier;
   final int actualSet;
   final List<PlayerEntity> players;
   final List<PlayerEntity> lostLifesPlayers;
@@ -19,6 +20,7 @@ class GameState extends Equatable {
       this.initialLifes,
       this.actualSet,
       this.actualHand,
+      this.croupier,
       this.players,
       this.lostLifesPlayers,
       this.pointsActualSet,
@@ -33,6 +35,7 @@ class GameState extends Equatable {
         nUpdates,
         initialLifes,
         actualHand,
+        croupier,
         actualSet,
         players,
         lostLifesPlayers,
@@ -49,6 +52,7 @@ class GameState extends Equatable {
       int initialLifes,
       int actualSet,
       int actualHand,
+      int croupier,
       List<PlayerEntity> players,
       List<PlayerEntity> lostLifesPlayers,
       List<List<int>> pointsActualSet,
@@ -62,6 +66,7 @@ class GameState extends Equatable {
       initialLifes: initialLifes ?? this.initialLifes,
       actualSet: actualSet ?? this.actualSet,
       actualHand: actualHand ?? this.actualHand,
+      croupier: croupier ?? this.croupier,
       players: players ?? this.players,
       lostLifesPlayers: lostLifesPlayers ?? this.lostLifesPlayers,
       pointsActualSet: pointsActualSet ?? this.pointsActualSet,

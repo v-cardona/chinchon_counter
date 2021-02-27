@@ -25,6 +25,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           initialLifes: event.lifes,
           actualSet: 0,
           actualHand: 0,
+          croupier: event.croupier,
           players: event.players,
           pointsActualSet: pointsActualSet,
           pointsSets: pointsSets,
@@ -41,6 +42,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       yield state.copyWith(
           nUpdates: state.nUpdates + 1,
           actualHand: state.actualHand + 1,
+          croupier: (state.croupier + 1) % state.players.length,
           pointsActualSet: pointsActualSet,
           pointsSets: pointsSets,
           status: GameStatus.loaded);

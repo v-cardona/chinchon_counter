@@ -131,8 +131,7 @@ class DatatableSetWidget extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                if (showCroupier &&
-                    i == state.actualHand % state.players.length)
+                if (showCroupier && i == state.croupier)
                   Container(
                     color: Theme.of(context).accentColor,
                     height: Sizes.dimen_4,

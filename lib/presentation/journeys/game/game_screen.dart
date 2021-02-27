@@ -10,10 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameScreen extends StatefulWidget {
   final int initialLifes;
+  final int croupier;
   final List<PlayerEntity> players;
 
   const GameScreen(
-      {Key key, @required this.initialLifes, @required this.players})
+      {Key key,
+      @required this.initialLifes,
+      @required this.players,
+      this.croupier = 0})
       : super(key: key);
 
   @override
@@ -27,8 +31,10 @@ class _GameScreenState extends State<GameScreen> {
   void initState() {
     super.initState();
     _gameBloc = getItInstance<GameBloc>();
-    _gameBloc.add(
-        InitGameEvent(lifes: widget.initialLifes, players: widget.players));
+    _gameBloc.add(InitGameEvent(
+        lifes: widget.initialLifes,
+        players: widget.players,
+        croupier: widget.croupier));
   }
 
   @override

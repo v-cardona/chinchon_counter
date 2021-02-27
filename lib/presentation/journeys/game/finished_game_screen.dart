@@ -3,7 +3,9 @@ import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/presentation/bloc/game/game_bloc.dart';
+import 'package:chinchon_counter/presentation/journeys/game/game_screen.dart';
 import 'package:chinchon_counter/presentation/themes/app_color.dart';
+import 'package:chinchon_counter/presentation/widgets/alert_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +21,27 @@ class FinishedGameScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(TranslationConstants.finishedGame.translate()),
         leading: Icon(Icons.close),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              child: AlertDialogWidget(
+                  title: '¿Reiniciar partida?',
+                  content:
+                      'Jugarás una partida nueva con los mismos jugadores y vidas',
+                  onPressedYes: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => GameScreen(
+                              initialLifes: state.initialLifes,
+                              players: state.players,
+                              croupier: state.croupier,
+                            )));
+                  }));
+        },
+        child: Icon(Icons.refresh),
       ),
       body: Padding(
         padding: EdgeInsets.all(Sizes.dimen_15.w),
