@@ -42,3 +42,5 @@ class EditPointsHand extends GameEvent {
 }
 
 class NextSet extends GameEvent {}
+
+class FinisheGameEvent extends GameEvent {}

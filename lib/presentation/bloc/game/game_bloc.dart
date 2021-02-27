@@ -63,6 +63,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           status: GameStatus.loaded);
     } else if (event is NextSet) {
       yield* _checkGameFinished();
+    } else if (event is FinisheGameEvent) {
+      yield* _gameFinished();
     }
   }
 
@@ -134,5 +136,44 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           actualSet: state.actualSet + 1,
           status: GameStatus.loaded);
     }
+  }
+
+  Stream<GameState> _gameFinished() async* {
+    List<int> pointsSet = state.pointsSets[state.actualSet];
+    List<int> lifes = state.lifes;
+    PlayerEntity loser;
+    PlayerEntity winner;
+    int maxPointsSet = 0;
+    int maxLifes = 0;
+    int minLifes = 5;
+    double minPointsSet = double.maxFinite;
+
+    for (int i = 0; i < lifes.length; i++) {
+      if (lifes[i] < minLifes) {
+        loser = state.players[i];
+        maxPointsSet = pointsSet[i];
+        minLifes = lifes[i];
+      } else if (lifes[i] == minLifes) {
+        if (maxPointsSet <= pointsSet[i]) {
+          loser = state.players[i];
+          maxPointsSet = pointsSet[i];
+          minLifes = lifes[i];
+        }
+      }
+
+      if (maxLifes <= lifes[i]) {
+        if (pointsSet[i] <= minPointsSet) {
+          winner = state.players[i];
+          minPointsSet = pointsSet[i].toDouble();
+          maxLifes = lifes[i];
+        }
+      }
+    }
+
+    yield state.copyWith(
+        loser: loser,
+        winner: winner,
+        nUpdates: state.nUpdates + 1,
+        status: GameStatus.finishedGame);
   }
 }

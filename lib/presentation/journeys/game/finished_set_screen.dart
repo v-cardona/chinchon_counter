@@ -16,63 +16,70 @@ class FinishedSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GameState state = BlocProvider.of<GameBloc>(context).state;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(TranslationConstants.finishedSet.translate()),
-        leading: Icon(Icons.close),
-      ),
-      body: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(Sizes.dimen_15.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  TranslationConstants.lostLifes.translate(),
-                  style: TextStyle(
-                      color: Colors.white, fontSize: Sizes.dimen_18.sp),
-                ),
-                for (var i = 0; i < state.lostLifesPlayers.length; i++)
-                  ListTile(
-                      leading: Image.asset("assets/images/favorite-broken.png"),
-                      title: Text(
-                        '${state.lostLifesPlayers[i].name}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      )),
-                RichText(
-                    text: TextSpan(
-                        text: TranslationConstants.setResumen.translate(),
-                        style: TextStyle(
-                            color: Colors.white, fontSize: Sizes.dimen_18.sp),
-                        children: [
-                      TextSpan(
-                        text: '${state.actualSet + 1}',
-                        style: TextStyle(
-                            color: Colors.white, fontSize: Sizes.dimen_18.sp),
-                      )
-                    ])),
-                Expanded(
-                  child: DatatableSetWidget(
-                    state: state,
-                    headingRowColor: AppColor.vulcan,
-                    showGameFinishedResume: false,
+    return WillPopScope(
+      onWillPop: () async {
+        BlocProvider.of<GameBloc>(context).add(NextSet());
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(TranslationConstants.finishedSet.translate()),
+        ),
+        body: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(Sizes.dimen_15.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    TranslationConstants.lostLifes.translate(),
+                    style: TextStyle(
+                        color: Colors.white, fontSize: Sizes.dimen_18.sp),
                   ),
-                ),
-              ],
+                  for (var i = 0; i < state.lostLifesPlayers.length; i++)
+                    ListTile(
+                        leading:
+                            Image.asset("assets/images/favorite-broken.png"),
+                        title: Text(
+                          '${state.lostLifesPlayers[i].name}',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        )),
+                  RichText(
+                      text: TextSpan(
+                          text: TranslationConstants.setResumen.translate(),
+                          style: TextStyle(
+                              color: Colors.white, fontSize: Sizes.dimen_18.sp),
+                          children: [
+                        TextSpan(
+                          text: '${state.actualSet + 1}',
+                          style: TextStyle(
+                              color: Colors.white, fontSize: Sizes.dimen_18.sp),
+                        )
+                      ])),
+                  Expanded(
+                    child: DatatableSetWidget(
+                      state: state,
+                      headingRowColor: AppColor.vulcan,
+                      showGameFinishedResume: false,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Button(
-                  text: TranslationConstants.continueBtn,
-                  onPressed: () {
-                    BlocProvider.of<GameBloc>(context).add(NextSet());
-                    Navigator.of(context).pop();
-                  }))
-        ],
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Button(
+                    text: TranslationConstants.continueBtn,
+                    onPressed: () {
+                      BlocProvider.of<GameBloc>(context).add(NextSet());
+                      Navigator.of(context).pop();
+                    }))
+          ],
+        ),
       ),
     );
   }

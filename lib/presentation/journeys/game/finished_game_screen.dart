@@ -20,16 +20,18 @@ class FinishedGameScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(TranslationConstants.finishedGame.translate()),
-        leading: Icon(Icons.close),
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(Icons.close),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
               context: context,
               child: AlertDialogWidget(
-                  title: '¿Reiniciar partida?',
-                  content:
-                      'Jugarás una partida nueva con los mismos jugadores y vidas',
+                  title: TranslationConstants.gameAgain.translate(),
+                  content: TranslationConstants.gameAgainConfirm.translate(),
                   onPressedYes: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();

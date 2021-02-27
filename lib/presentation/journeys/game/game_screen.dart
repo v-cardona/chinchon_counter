@@ -5,6 +5,7 @@ import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/game/game_bloc.dart';
 import 'package:chinchon_counter/presentation/journeys/game/puntuation_table_set.dart';
 import 'package:chinchon_counter/presentation/journeys/points_hand/points_hand_screen.dart';
+import 'package:chinchon_counter/presentation/widgets/alert_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,26 +46,45 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.close),
-        title: Text(TranslationConstants.appTitle.translate()),
-        elevation: 0,
-      ),
-      body: BlocProvider(
-        create: (_) => _gameBloc,
-        child: PuntuationTableSet(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-                  value: _gameBloc,
-                  child: PointsHandScreen(
-                    players: widget.players,
-                  ),
-                ))),
-        child: Icon(Icons.add),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: _onWillPop,
+            icon: Icon(Icons.close),
+          ),
+          title: Text(TranslationConstants.appTitle.translate()),
+          elevation: 0,
+        ),
+        body: BlocProvider(
+          create: (_) => _gameBloc,
+          child: PuntuationTableSet(),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => BlocProvider.value(
+                    value: _gameBloc,
+                    child: PointsHandScreen(
+                      players: widget.players,
+                    ),
+                  ))),
+          child: Icon(Icons.add),
+        ),
       ),
     );
+  }
+
+  Future<bool> _onWillPop() async {
+    await showDialog(
+        context: context,
+        child: AlertDialogWidget(
+            title: TranslationConstants.finishGame.translate(),
+            content: TranslationConstants.finishGameConfirm.translate(),
+            onPressedYes: () {
+              _gameBloc.add(FinisheGameEvent());
+              Navigator.of(context).pop();
+            }));
+    return false;
   }
 }

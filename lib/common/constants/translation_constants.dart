@@ -32,6 +32,10 @@ class TranslationConstants {
   static const String yes = 'yes';
   static const String areYouSure = 'areYouSure';
   static const String reallyDeletePlayer = 'reallyDeletePlayer';
+  static const String gameAgain = 'gameAgain';
+  static const String gameAgainConfirm = 'gameAgainConfirm';
+  static const String finishGame = 'finishGame';
+  static const String finishGameConfirm = 'finishGameConfirm';
   static const String deletedPlayer = 'deletedPlayer';
 
   // ERROR MESSAGES
