@@ -17,7 +17,6 @@ class PointsPlayerListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      key: key,
       children: [
         ListTile(
             leading: UserColorWidget(
