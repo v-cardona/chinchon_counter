@@ -48,7 +48,7 @@ Future init() async {
       ));
   getItInstance.registerFactory(() => SelectLifesGameBloc());
   getItInstance.registerFactory(() => OrderPlayersBloc());
-  getItInstance.registerLazySingleton(() => GameBloc());
+  getItInstance.registerFactory(() => GameBloc());
   getItInstance.registerFactory(() => PointsHandBloc());
   getItInstance.registerFactory(() => EditPointsHandBloc());
 }
