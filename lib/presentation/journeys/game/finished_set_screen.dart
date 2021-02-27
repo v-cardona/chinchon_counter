@@ -19,7 +19,7 @@ class FinishedSetScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         BlocProvider.of<GameBloc>(context).add(NextSet());
-        return false;
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
