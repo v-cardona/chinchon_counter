@@ -104,7 +104,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         }
       }
 
-      if (maxLifes < lifes[i]) {
+      if (maxLifes <= lifes[i]) {
         if (pointsSet[i] <= minPointsSet) {
           winner = state.players[i];
           minPointsSet = pointsSet[i].toDouble();
