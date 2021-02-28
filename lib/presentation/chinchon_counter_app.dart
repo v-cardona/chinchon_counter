@@ -1,5 +1,6 @@
 import 'package:chinchon_counter/common/constants/languages.dart';
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
+import 'package:chinchon_counter/common/screenutil/screenutil.dart';
 import 'package:chinchon_counter/presentation/journeys/home/home_screen.dart';
 import 'package:chinchon_counter/presentation/themes/app_color.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,9 @@ class ChinchonCounterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize ScreenUtil so that it can use it while defining
+    ScreenUtil.init();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: TranslationConstants.appTitle,
