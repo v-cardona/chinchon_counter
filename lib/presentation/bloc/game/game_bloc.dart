@@ -141,7 +141,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _gameFinished() async* {
-    List<int> pointsSet = state.pointsSets[state.actualSet];
     List<int> lifes = state.lifes;
     PlayerEntity loser;
     PlayerEntity winner;
@@ -149,6 +148,11 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     int maxLifes = 0;
     int minLifes = 5;
     double minPointsSet = double.maxFinite;
+    List<int> pointsSet = state.pointsSets[state.actualSet];
+
+    if (pointsSet.every((element) => element == 0) && 0 < state.actualSet) {
+      pointsSet = state.pointsSets[state.actualSet - 1];
+    }
 
     for (int i = 0; i < lifes.length; i++) {
       if (lifes[i] < minLifes) {
