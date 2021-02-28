@@ -1,3 +1,4 @@
+import 'package:chinchon_counter/common/constants/game_constants.dart';
 import 'package:chinchon_counter/common/constants/size_constants.dart';
 import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
@@ -36,8 +37,8 @@ class OptionsGameLifes extends StatelessWidget {
                     onChanged: (value) =>
                         BlocProvider.of<SelectLifesGameBloc>(context)
                             .add(ToggleSelecLifeEvent(lifes: value.toInt())),
-                    min: 1,
-                    max: 5,
+                    min: GameConstants.min_lifes.toDouble(),
+                    max: GameConstants.max_lifes.toDouble(),
                     divisions: 4,
                     activeColor: AppColor.violet,
                     inactiveColor: AppColor.mulledWine,

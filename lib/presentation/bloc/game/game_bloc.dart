@@ -146,7 +146,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     PlayerEntity winner;
     int maxPointsSet = 0;
     int maxLifes = 0;
-    int minLifes = 5;
+    int minLifes = GameConstants.max_lifes;
     double minPointsSet = double.maxFinite;
     List<int> pointsSet = state.pointsSets[state.actualSet];
 
