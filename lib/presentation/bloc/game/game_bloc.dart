@@ -108,12 +108,14 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         }
       }
 
-      if (maxLifes <= lifes[i]) {
-        if (pointsSet[i] <= minPointsSet) {
-          winner = state.players[i];
-          minPointsSet = pointsSet[i].toDouble();
-          maxLifes = lifes[i];
-        }
+      if (maxLifes < lifes[i]) {
+        winner = state.players[i];
+        minPointsSet = pointsSet[i].toDouble();
+        maxLifes = lifes[i];
+      } else if (maxLifes == lifes[i] && pointsSet[i] <= minPointsSet) {
+        winner = state.players[i];
+        minPointsSet = pointsSet[i].toDouble();
+        maxLifes = lifes[i];
       }
     }
 
@@ -153,20 +155,20 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         loser = state.players[i];
         maxPointsSet = pointsSet[i];
         minLifes = lifes[i];
-      } else if (lifes[i] == minLifes) {
-        if (maxPointsSet <= pointsSet[i]) {
-          loser = state.players[i];
-          maxPointsSet = pointsSet[i];
-          minLifes = lifes[i];
-        }
+      } else if (lifes[i] == minLifes && maxPointsSet <= pointsSet[i]) {
+        loser = state.players[i];
+        maxPointsSet = pointsSet[i];
+        minLifes = lifes[i];
       }
 
-      if (maxLifes <= lifes[i]) {
-        if (pointsSet[i] <= minPointsSet) {
-          winner = state.players[i];
-          minPointsSet = pointsSet[i].toDouble();
-          maxLifes = lifes[i];
-        }
+      if (maxLifes < lifes[i]) {
+        winner = state.players[i];
+        minPointsSet = pointsSet[i].toDouble();
+        maxLifes = lifes[i];
+      } else if (maxLifes == lifes[i] && pointsSet[i] <= minPointsSet) {
+        winner = state.players[i];
+        minPointsSet = pointsSet[i].toDouble();
+        maxLifes = lifes[i];
       }
     }
 
