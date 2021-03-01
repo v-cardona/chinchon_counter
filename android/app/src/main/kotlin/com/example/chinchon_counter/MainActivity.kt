@@ -1,4 +1,4 @@
-package com.example.chinchon_counter
+package v.cardona.chinchon_counter
 
 import io.flutter.embedding.android.FlutterActivity
 
