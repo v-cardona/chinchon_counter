@@ -67,6 +67,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           pointsActualSet: pointsActualSet,
           pointsSets: pointsSets,
           status: GameStatus.loaded);
+      yield* _checkSetFinished();
     } else if (event is NextSet) {
       yield* _checkGameFinished();
     } else if (event is FinisheGameEvent) {
