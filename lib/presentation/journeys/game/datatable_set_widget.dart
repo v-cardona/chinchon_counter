@@ -1,3 +1,4 @@
+import 'package:chinchon_counter/common/constants/game_constants.dart';
 import 'package:chinchon_counter/common/constants/size_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
@@ -71,39 +72,46 @@ class DatatableSetWidget extends StatelessWidget {
                 DataRow(
                   cells: [
                     for (int j = 0; j < state.pointsActualSet[i].length; j++)
-                      DataCell(
-                          Center(
-                            child: Text(
-                              '${state.pointsActualSet[i][j]}',
-                              style: TextStyle(
-                                color: AppColor.violet,
-                                fontSize: Sizes.dimen_20.sp,
+                      if (state.lifes[j] != GameConstants.dead_player)
+                        DataCell(
+                            Center(
+                              child: Text(
+                                '${state.pointsActualSet[i][j]}',
+                                style: TextStyle(
+                                  color: AppColor.violet,
+                                  fontSize: Sizes.dimen_20.sp,
+                                ),
                               ),
-                            ),
-                          ), onTap: () {
-                        if (editCell) {
-                          String name = state.players[j].name;
-                          int color = state.players[j].color;
-                          int actualPoints = state.pointsActualSet[i][j];
-                          int indexHand = i;
-                          int indexPlayer = j;
-                          showDialog(
-                              context: context,
-                              child: EditPuntuationHandEdit(
-                                actualPoints: actualPoints,
-                                color: color,
-                                name: name,
-                              )).then((value) {
-                            if (value != null) {
-                              BlocProvider.of<GameBloc>(context).add(
-                                  EditPointsHand(
-                                      points: value,
-                                      indexHand: indexHand,
-                                      indexPlayer: indexPlayer));
-                            }
-                          });
-                        }
-                      })
+                            ), onTap: () {
+                          if (editCell) {
+                            String name = state.players[j].name;
+                            int color = state.players[j].color;
+                            int actualPoints = state.pointsActualSet[i][j];
+                            int indexHand = i;
+                            int indexPlayer = j;
+                            showDialog(
+                                context: context,
+                                child: EditPuntuationHandEdit(
+                                  actualPoints: actualPoints,
+                                  color: color,
+                                  name: name,
+                                )).then((value) {
+                              if (value != null) {
+                                BlocProvider.of<GameBloc>(context).add(
+                                    EditPointsHand(
+                                        points: value,
+                                        indexHand: indexHand,
+                                        indexPlayer: indexPlayer));
+                              }
+                            });
+                          }
+                        })
+                      else
+                        DataCell(Center(
+                            child: Icon(
+                          Icons.close,
+                          color: Colors.red[300],
+                        ))),
                   ],
                 )
           ],
@@ -149,21 +157,34 @@ class DatatableSetWidget extends StatelessWidget {
     List<DataCell> cellsLifes = [];
     for (int i = 0; i < state.lifes.length; i++) {
       int lifes = state.lifes[i];
-      List<Icon> iconsLifes = [];
-      for (int i = 0; i < lifes; i++) {
-        Icon icon = Icon(
-          Icons.favorite,
-          color: AppColor.violet,
+      DataCell cell;
+
+      if (lifes != GameConstants.dead_player) {
+        List<Icon> iconsLifes = [];
+
+        for (int i = 0; i < lifes; i++) {
+          Icon icon = Icon(
+            Icons.favorite,
+            color: AppColor.violet,
+          );
+          iconsLifes.add(icon);
+        }
+        cell = DataCell(
+          Center(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: iconsLifes,
+          )),
         );
-        iconsLifes.add(icon);
+      } else {
+        cell = DataCell(
+          Center(
+              child: Icon(
+            Icons.close,
+            color: Colors.red,
+          )),
+        );
       }
-      DataCell cell = DataCell(
-        Center(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: iconsLifes,
-        )),
-      );
       cellsLifes.add(cell);
     }
 
@@ -174,22 +195,34 @@ class DatatableSetWidget extends StatelessWidget {
     List<DataCell> cellsPoints = [];
     for (int i = 0; i < state.pointsSets[state.actualSet].length; i++) {
       int setPoints = state.pointsSets[state.actualSet][i];
-      DataCell cell = DataCell(
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_8.w),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.deepPurple),
-              borderRadius: BorderRadius.all(Radius.circular(Sizes.dimen_5))),
-          child: Center(
-              child: Text(
-            '$setPoints',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: Sizes.dimen_20.sp,
-            ),
+      DataCell cell;
+
+      if (state.lifes[i] != GameConstants.dead_player) {
+        cell = DataCell(
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_8.w),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.deepPurple),
+                borderRadius: BorderRadius.all(Radius.circular(Sizes.dimen_5))),
+            child: Center(
+                child: Text(
+              '$setPoints',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: Sizes.dimen_20.sp,
+              ),
+            )),
+          ),
+        );
+      } else {
+        cell = DataCell(
+          Center(
+              child: Icon(
+            Icons.close,
+            color: Colors.red[300],
           )),
-        ),
-      );
+        );
+      }
       cellsPoints.add(cell);
     }
     return DataRow(cells: cellsPoints);

@@ -10,12 +10,17 @@ abstract class GameEvent extends Equatable {
 class InitGameEvent extends GameEvent {
   final int lifes;
   final int croupier;
+  final WhenFinishGameOptions whenFinishGame;
   final List<PlayerEntity> players;
 
-  InitGameEvent({@required this.lifes, @required this.players, this.croupier});
+  InitGameEvent(
+      {@required this.lifes,
+      @required this.players,
+      @required this.whenFinishGame,
+      this.croupier});
 
   @override
-  List<Object> get props => [lifes, players];
+  List<Object> get props => [lifes, players, whenFinishGame];
 }
 
 class AddPointsHand extends GameEvent {

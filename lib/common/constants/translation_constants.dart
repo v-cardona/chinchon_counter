@@ -24,6 +24,9 @@ class TranslationConstants {
   static const String name = 'name';
   static const String chooseColor = 'chooseColor';
   static const String chooseLifes = 'chooseLifes';
+  static const String chooseWhenFinishGame = 'chooseWhenFinishGame';
+  static const String finishGameFirstDead = 'finishGameFirstDead';
+  static const String finishGameLastDead = 'finishGameLastDead';
   static const String orderPlayers = 'orderPlayers';
   static const String longPressOrderPlayers = 'longPressOrderPlayers';
   static const String done = 'done';

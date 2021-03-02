@@ -39,6 +39,7 @@ class FinishedGameScreen extends StatelessWidget {
                         builder: (_) => GameScreen(
                               initialLifes: state.initialLifes,
                               players: state.players,
+                              whenFinishGame: state.whenFinishGame,
                               croupier: state.croupier,
                             )));
                   }));

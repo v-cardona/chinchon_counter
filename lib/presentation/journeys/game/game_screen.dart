@@ -3,6 +3,7 @@ import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/game/game_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/when_finish_game/when_finish_game_bloc.dart';
 import 'package:chinchon_counter/presentation/journeys/game/puntuation_table_set.dart';
 import 'package:chinchon_counter/presentation/journeys/points_hand/points_hand_screen.dart';
 import 'package:chinchon_counter/presentation/widgets/alert_dialog_widget.dart';
@@ -12,12 +13,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GameScreen extends StatefulWidget {
   final int initialLifes;
   final int croupier;
+  final WhenFinishGameOptions whenFinishGame;
   final List<PlayerEntity> players;
 
   const GameScreen(
       {Key key,
       @required this.initialLifes,
       @required this.players,
+      @required this.whenFinishGame,
       this.croupier = 0})
       : super(key: key);
 
@@ -35,6 +38,7 @@ class _GameScreenState extends State<GameScreen> {
     _gameBloc.add(InitGameEvent(
         lifes: widget.initialLifes,
         players: widget.players,
+        whenFinishGame: widget.whenFinishGame,
         croupier: widget.croupier));
   }
 

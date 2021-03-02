@@ -12,7 +12,9 @@ class GameState extends Equatable {
   final List<List<int>> pointsSets;
   final List<int> lifes;
   final PlayerEntity loser;
+  final bool loserFound;
   final PlayerEntity winner;
+  final WhenFinishGameOptions whenFinishGame;
   final GameStatus status;
 
   const GameState(
@@ -27,7 +29,9 @@ class GameState extends Equatable {
       this.pointsSets,
       this.lifes,
       this.loser,
+      this.loserFound = false,
       this.winner,
+      this.whenFinishGame,
       this.status = GameStatus.initial});
 
   @override
@@ -43,7 +47,9 @@ class GameState extends Equatable {
         pointsSets,
         lifes,
         loser,
+        loserFound,
         winner,
+        whenFinishGame,
         status
       ];
 
@@ -59,7 +65,9 @@ class GameState extends Equatable {
       List<List<int>> pointsSets,
       List<int> lifes,
       PlayerEntity loser,
+      bool loserFound,
       PlayerEntity winner,
+      WhenFinishGameOptions whenFinishGame,
       GameStatus status}) {
     return GameState(
       nUpdates: nUpdates ?? this.nUpdates,
@@ -73,7 +81,9 @@ class GameState extends Equatable {
       pointsSets: pointsSets ?? this.pointsSets,
       lifes: lifes ?? this.lifes,
       loser: loser ?? this.loser,
+      loserFound: loserFound ?? this.loserFound,
       winner: winner ?? this.winner,
+      whenFinishGame: whenFinishGame ?? this.whenFinishGame,
       status: status ?? this.status,
     );
   }

@@ -14,6 +14,7 @@ import 'package:chinchon_counter/presentation/bloc/player/player_bloc.dart';
 import 'package:chinchon_counter/presentation/bloc/points_hand/points_hand_bloc.dart';
 import 'package:chinchon_counter/presentation/bloc/select_lifes_game/select_lifes_game_bloc.dart';
 import 'package:chinchon_counter/presentation/bloc/select_players/select_players_bloc.dart';
+import 'package:chinchon_counter/presentation/bloc/when_finish_game/when_finish_game_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final getItInstance = GetIt.I;
@@ -47,6 +48,7 @@ Future init() async {
         getPlayers: getItInstance(),
       ));
   getItInstance.registerFactory(() => SelectLifesGameBloc());
+  getItInstance.registerFactory(() => WhenFinishGameBloc());
   getItInstance.registerFactory(() => OrderPlayersBloc());
   getItInstance.registerFactory(() => GameBloc());
   getItInstance.registerFactory(() => PointsHandBloc());
