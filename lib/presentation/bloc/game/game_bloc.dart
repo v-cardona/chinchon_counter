@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:chinchon_counter/common/constants/game_constants.dart';
+import 'package:chinchon_counter/common/constants/math_constants.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/when_finish_game/when_finish_game_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -21,6 +22,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       List<List<int>> pointsActualSet = [];
       List<List<int>> pointsSets = [List.filled(event.players.length, 0)];
       List<int> lifes = List.filled(event.players.length, event.lifes);
+      List<int> lifesLostAt =
+          List.filled(event.players.length, MathConstants.max_int);
       yield state.copyWith(
           nUpdates: state.nUpdates + 1,
           initialLifes: event.lifes,
@@ -31,6 +34,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           pointsActualSet: pointsActualSet,
           pointsSets: pointsSets,
           lifes: lifes,
+          lifesLostAt: lifesLostAt,
           whenFinishGame: event.whenFinishGame,
           status: GameStatus.loaded);
     } else if (event is AddPointsHand) {
@@ -90,6 +94,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     List<int> lifes = state.lifes;
     List<PlayerEntity> lostLifesPlayers = [];
     bool setFinished = false;
+
     for (int i = 0; i < pointsSet.length; i++) {
       if (GameConstants.max_puntuation < pointsSet[i]) {
         setFinished = true;
@@ -160,6 +165,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   Stream<GameState> _checkGameFinishedLastDead() async* {
     List<int> pointsSet = state.pointsSets[state.actualSet];
     List<int> lifes = state.lifes;
+    List<int> lifesLostAt = state.lifesLostAt;
     PlayerEntity loser;
     PlayerEntity winner;
     int maxPointsSet = 0;
@@ -191,6 +197,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     for (int i = 0; i < lifes.length; i++) {
       if (lifes[i] == GameConstants.lifes_lost) {
         lifes[i] = GameConstants.dead_player;
+        lifesLostAt[i] = state.actualSet;
       }
     }
 

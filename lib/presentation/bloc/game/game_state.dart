@@ -11,6 +11,7 @@ class GameState extends Equatable {
   final List<List<int>> pointsActualSet;
   final List<List<int>> pointsSets;
   final List<int> lifes;
+  final List<int> lifesLostAt;
   final PlayerEntity loser;
   final bool loserFound;
   final PlayerEntity winner;
@@ -28,6 +29,7 @@ class GameState extends Equatable {
       this.pointsActualSet,
       this.pointsSets,
       this.lifes,
+      this.lifesLostAt,
       this.loser,
       this.loserFound = false,
       this.winner,
@@ -46,6 +48,7 @@ class GameState extends Equatable {
         pointsActualSet,
         pointsSets,
         lifes,
+        lifesLostAt,
         loser,
         loserFound,
         winner,
@@ -64,6 +67,7 @@ class GameState extends Equatable {
       List<List<int>> pointsActualSet,
       List<List<int>> pointsSets,
       List<int> lifes,
+      List<int> lifesLostAt,
       PlayerEntity loser,
       bool loserFound,
       PlayerEntity winner,
@@ -80,6 +84,7 @@ class GameState extends Equatable {
       pointsActualSet: pointsActualSet ?? this.pointsActualSet,
       pointsSets: pointsSets ?? this.pointsSets,
       lifes: lifes ?? this.lifes,
+      lifesLostAt: lifesLostAt ?? this.lifesLostAt,
       loser: loser ?? this.loser,
       loserFound: loserFound ?? this.loserFound,
       winner: winner ?? this.winner,

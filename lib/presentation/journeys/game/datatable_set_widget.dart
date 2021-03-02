@@ -44,25 +44,32 @@ class DatatableSetWidget extends StatelessWidget {
               for (int i = 0; i < state.pointsSets.length; i++)
                 DataRow(cells: [
                   for (int j = 0; j < state.pointsSets[i].length; j++)
-                    DataCell(
-                      Container(
-                        margin: EdgeInsets.only(bottom: Sizes.dimen_3.h),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Sizes.dimen_8.w),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Sizes.dimen_5))),
-                        child: Center(
-                            child: Text(
-                          '${state.pointsSets[i][j]}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Sizes.dimen_20.sp,
-                          ),
-                        )),
-                      ),
-                    ),
+                    if (i <= state.lifesLostAt[j])
+                      DataCell(
+                        Container(
+                          margin: EdgeInsets.only(bottom: Sizes.dimen_3.h),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: Sizes.dimen_8.w),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Sizes.dimen_5))),
+                          child: Center(
+                              child: Text(
+                            '${state.pointsSets[i][j]}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Sizes.dimen_20.sp,
+                            ),
+                          )),
+                        ),
+                      )
+                    else
+                      DataCell(Center(
+                          child: Icon(
+                        Icons.close,
+                        color: Colors.red[300],
+                      ))),
                 ]),
             // sum points of set
             if (!showGameFinishedResume) _createTotalPoints(state),
