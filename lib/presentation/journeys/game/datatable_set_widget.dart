@@ -56,11 +56,15 @@ class DatatableSetWidget extends StatelessWidget {
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Sizes.dimen_5))),
                           child: Center(
-                              child: Text(
-                            '${state.pointsSets[i][j]}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Sizes.dimen_20.sp,
+                              child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(
+                              '${state.pointsSets[i][j]}',
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Sizes.dimen_20.sp,
+                              ),
                             ),
                           )),
                         ),
@@ -213,11 +217,15 @@ class DatatableSetWidget extends StatelessWidget {
                 border: Border.all(color: Colors.deepPurple),
                 borderRadius: BorderRadius.all(Radius.circular(Sizes.dimen_5))),
             child: Center(
-                child: Text(
-              '$setPoints',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: Sizes.dimen_20.sp,
+                child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(
+                '$setPoints',
+                maxLines: 1,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: Sizes.dimen_20.sp,
+                ),
               ),
             )),
           ),
