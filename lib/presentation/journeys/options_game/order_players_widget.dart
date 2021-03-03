@@ -33,38 +33,63 @@ class OrderPlayersWidget extends StatelessWidget {
           if (state.status == OrderPlayerStatus.loaded ||
               state.status == OrderPlayerStatus.error) {
             return Expanded(
-                child: Padding(
-              padding: EdgeInsets.only(top: Sizes.dimen_14.h),
-              child: Theme(
-                data: Theme.of(context)
-                    .copyWith(canvasColor: AppColor.mulledWine),
-                child: ReorderableListView(
-                  header: Row(
+                child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: Sizes.dimen_14.w,
+                      bottom: Sizes.dimen_8.h,
+                      top: Sizes.dimen_8.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: Sizes.dimen_14.w, bottom: Sizes.dimen_8.h),
-                        child: Text(
-                          TranslationConstants.orderPlayers.translate(),
-                          style: TextStyle(color: Colors.white),
-                        ),
+                      Text(
+                        TranslationConstants.orderPlayers.translate(),
+                        style: TextStyle(
+                            color: Colors.white, fontSize: Sizes.dimen_16.sp),
                       ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.info,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => showDialog(
+                            context: context,
+                            child: AlertDialog(
+                              actions: [
+                                FlatButton(
+                                  textColor: AppColor.electricViolet,
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text(
+                                      TranslationConstants.close.translate()),
+                                ),
+                              ],
+                              content: Text(
+                                TranslationConstants.infoOrderPlayersCroupier
+                                    .translate(),
+                              ),
+                            )),
+                      )
                     ],
                   ),
-                  children: [
-                    for (final player in state.players)
-                      OrderPlayerListItem(
-                          key: ValueKey(player.id), player: player)
-                  ],
-                  onReorder: (oldIndex, newIndex) {
-                    BlocProvider.of<OrderPlayersBloc>(context).add(
-                        MovePlayerOrderEvent(
-                            players: state.players,
-                            oldIndex: oldIndex,
-                            newIndex: newIndex));
-                  },
                 ),
-              ),
+                Expanded(
+                  child: ReorderableListView(
+                    children: [
+                      for (final player in state.players)
+                        OrderPlayerListItem(
+                            key: ValueKey(player.id), player: player)
+                    ],
+                    onReorder: (oldIndex, newIndex) {
+                      BlocProvider.of<OrderPlayersBloc>(context).add(
+                          MovePlayerOrderEvent(
+                              players: state.players,
+                              oldIndex: oldIndex,
+                              newIndex: newIndex));
+                    },
+                  ),
+                ),
+              ],
             ));
           } else {
             return CircularProgressIndicator();

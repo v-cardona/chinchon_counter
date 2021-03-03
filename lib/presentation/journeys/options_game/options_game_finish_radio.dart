@@ -18,7 +18,7 @@ class OptionsGameFinishRadio extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(Sizes.dimen_14.w, Sizes.dimen_8.h, 0, 0),
           child: Text(
             TranslationConstants.chooseWhenFinishGame.translate(),
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontSize: Sizes.dimen_16.sp),
           ),
         ),
         BlocBuilder<WhenFinishGameBloc, WhenFinishGameState>(

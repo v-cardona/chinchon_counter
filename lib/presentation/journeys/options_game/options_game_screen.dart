@@ -64,30 +64,37 @@ class _OptionsGameScreenState extends State<OptionsGameScreen> {
             BlocProvider(create: (context) => _whenFinishGameBloc),
             BlocProvider(create: (context) => _orderPlayersBloc)
           ],
-          child: Column(
+          child: Stack(
             children: [
-              OptionsGameLifes(),
-              OptionsGameFinishRadio(),
-              OrderPlayersWidget(),
-              Button(
-                  text: TranslationConstants.play,
-                  onPressed: () {
-                    int lifes = _selectLifesGameBloc.state.props[0];
-                    WhenFinishGameOptions whenFinishGame =
-                        _whenFinishGameBloc.state.props[0];
-                    List<PlayerEntity> players =
-                        _orderPlayersBloc.state.props[0];
-                    Navigator.of(context).popUntil(ModalRoute.withName('/'));
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => GameScreen(
-                          initialLifes: lifes,
-                          players: players,
-                          whenFinishGame: whenFinishGame,
+              Column(
+                children: [
+                  OptionsGameLifes(),
+                  OptionsGameFinishRadio(),
+                  OrderPlayersWidget(),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Button(
+                    text: TranslationConstants.play,
+                    onPressed: () {
+                      int lifes = _selectLifesGameBloc.state.props[0];
+                      WhenFinishGameOptions whenFinishGame =
+                          _whenFinishGameBloc.state.props[0];
+                      List<PlayerEntity> players =
+                          _orderPlayersBloc.state.props[0];
+                      Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => GameScreen(
+                            initialLifes: lifes,
+                            players: players,
+                            whenFinishGame: whenFinishGame,
+                          ),
                         ),
-                      ),
-                    );
-                  })
+                      );
+                    }),
+              )
             ],
           )),
     );

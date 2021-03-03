@@ -2,6 +2,7 @@ import 'package:chinchon_counter/common/constants/translation_constants.dart';
 import 'package:chinchon_counter/common/extensions/string_extensions.dart';
 import 'package:chinchon_counter/di/get_it.dart';
 import 'package:chinchon_counter/presentation/bloc/edit_points_hand/edit_points_hand_bloc.dart';
+import 'package:chinchon_counter/presentation/themes/app_color.dart';
 import 'package:chinchon_counter/presentation/widgets/user_color_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,12 +78,12 @@ class _EditPuntuationHandEditState extends State<EditPuntuationHandEdit> {
             )),
         actions: [
           FlatButton(
-            textColor: Color(0xFF6200EE),
+            textColor: AppColor.electricViolet,
             onPressed: () => Navigator.of(context).pop(),
             child: Text(TranslationConstants.cancel.translate()),
           ),
           RaisedButton(
-            color: Color(0xFF6200EE),
+            textColor: AppColor.electricViolet,
             onPressed: () => _editPointsHandBloc.add(SaveEditPointHandEvent()),
             child: Text(TranslationConstants.save.translate()),
           ),

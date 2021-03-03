@@ -26,6 +26,7 @@ class ChinchonCounterApp extends StatelessWidget {
           unselectedWidgetColor: AppColor.violet,
           toggleableActiveColor: AppColor.violet,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          canvasColor: AppColor.mulledWine,
           cursorColor: Colors.deepPurple),
       supportedLocales: Languages.languages.map((e) => Locale(e.code)).toList(),
       locale: Locale('es'),

@@ -13,6 +13,7 @@ class TranslationConstants {
   static const String play = 'play';
   static const String save = 'save';
   static const String cancel = 'cancel';
+  static const String close = 'close';
   static const String players = 'players';
   static const String selectPlayers = 'selectPlayers';
   static const String noPlayers = 'noPlayers';
@@ -28,6 +29,7 @@ class TranslationConstants {
   static const String finishGameFirstDead = 'finishGameFirstDead';
   static const String finishGameLastDead = 'finishGameLastDead';
   static const String orderPlayers = 'orderPlayers';
+  static const String infoOrderPlayersCroupier = 'infoOrderPlayersCroupier';
   static const String longPressOrderPlayers = 'longPressOrderPlayers';
   static const String done = 'done';
   static const String continueBtn = 'continueBtn';
