@@ -8,6 +8,9 @@ class AppColor {
   static const Color sunglow = Color(0xFFFFC138);
   static const Color tulipTree = Color(0xFFEAB748);
   static const Color husk = Color(0xFFBEA264);
+  static const Color blueRibbon = Color(0xFF384DFF);
+  static const Color cornflowerBlue = Color(0xFF4884EA);
+  static const Color shipCove = Color(0xFF647DBE);
   static const Color dodgerBlue = Color(0xFF38D0FF);
   static const Color pictonBlue = Color(0xFF48D4EA);
   static const Color fountainBlue = Color(0xFF64B5BE);

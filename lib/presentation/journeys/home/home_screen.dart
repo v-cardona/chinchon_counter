@@ -28,7 +28,8 @@ class HomeScreen extends StatelessWidget {
                   AppColor.husk
                 ],
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SelectPlayersGameScreen(),))),
+                      builder: (context) => SelectPlayersGameScreen(),
+                    ))),
             DashboardButton(
                 text: TranslationConstants.allPlayers,
                 colorsGradient: [
@@ -39,6 +40,29 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => AllPlayersScreen(),
                     ))),
+            DashboardButton(
+                text: TranslationConstants.about,
+                colorsGradient: [
+                  AppColor.blueRibbon,
+                  AppColor.cornflowerBlue,
+                  AppColor.shipCove
+                ],
+                onPressed: () => showAboutDialog(
+                      applicationIcon: Image.asset(
+                        'assets/images/logo.png',
+                        fit: BoxFit.fitWidth,
+                        scale: 6,
+                      ),
+                      applicationName:
+                          TranslationConstants.appTitle.translate(),
+                      children: [
+                        Text(TranslationConstants.contact.translate() +
+                            TranslationConstants.contactEmail.translate()),
+                        Text(TranslationConstants.developed.translate() +
+                            TranslationConstants.developerName.translate()),
+                      ],
+                      context: context,
+                    )),
           ],
         ),
       ),

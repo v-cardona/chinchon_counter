@@ -3,6 +3,11 @@ class TranslationConstants {
 
   static const String appTitle = 'appTitle';
   static const String newGame = 'newGame';
+  static const String about = 'about';
+  static const String contact = 'contact';
+  static const String contactEmail = 'contactEmail';
+  static const String developed = 'developed';
+  static const String developerName = 'developerName';
   static const String continueGame = 'continueGame';
   static const String allPlayers = 'allPlayers';
   static const String createPlayer = 'createPlayer';
