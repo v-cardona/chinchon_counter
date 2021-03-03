@@ -1,6 +1,7 @@
 import 'package:chinchon_counter/common/constants/game_constants.dart';
 import 'package:chinchon_counter/common/constants/size_constants.dart';
 import 'package:chinchon_counter/common/extensions/size_extensions.dart';
+import 'package:chinchon_counter/common/screenutil/screenutil.dart';
 import 'package:chinchon_counter/domain/entities/player_entity.dart';
 import 'package:chinchon_counter/presentation/bloc/game/game_bloc.dart';
 import 'package:chinchon_counter/presentation/themes/app_color.dart';
@@ -30,6 +31,7 @@ class DatatableSetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      padding: EdgeInsets.only(bottom: Sizes.dimen_40.h),
       scrollDirection: Axis.vertical,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
